@@ -27,6 +27,7 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 - Prefer markdown over tooling.
 - Keep assets short and readable.
+- Format skills around `Purpose`, `Inputs`, `Process`, and `Outputs`.
 - Add only one good example before adding more structure.
 - Optimize for Claude Code first.
 - Leave room to support other agents later without changing the core layout.

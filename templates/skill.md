@@ -1,9 +1,5 @@
 # Skill Template
 
-## Name
-
-Short skill name.
-
 ## Purpose
 
 What single task this skill helps with.
@@ -18,9 +14,9 @@ What single task this skill helps with.
 2. Step two
 3. Step three
 
-## Output
+## Outputs
 
-What a good result looks like.
+What a good result should include.
 
 ## Notes
 

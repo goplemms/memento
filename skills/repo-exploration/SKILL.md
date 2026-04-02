@@ -18,7 +18,7 @@ Help Claude Code quickly understand an unfamiliar repository before proposing ch
 4. Identify the smallest useful next action.
 5. Avoid broad exploration if a narrow answer is enough.
 
-## Output
+## Outputs
 
 A short summary of what matters, what is missing, which files were inspected, and what file or area should be touched next.
 

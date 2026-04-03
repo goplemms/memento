@@ -1,19 +1,14 @@
-# Claude Code Example
+# Claude Code examples (by skill)
 
-## Context
+Use these as copy-paste starters. Each file is one concrete scenario for a single skill.
 
-Use this prompt when starting in a small or unfamiliar repository.
+| Skill | Example |
+| --- | --- |
+| Repo exploration | [`repo-exploration.md`](repo-exploration.md) |
+| Discussion to plan | [`discussion-to-plan.md`](discussion-to-plan.md) |
 
-## Prompt
+## Persona (optional)
 
-You are helping me improve one small agent asset in this repo. Use the `personas/curious-builder/PERSONA.md` style. First, use the `skills/repo-exploration/SKILL.md` approach to understand only the files that matter, and list which files you inspected. Then suggest one smallest useful next edit and explain why it is the right next step.
+To combine with `personas/curious-builder/PERSONA.md`, add a line at the top of any prompt:
 
-## Expected Shape
-
-- short repo summary
-- clear recommendation
-- no broad framework expansion
-
-## Notes
-
-This example is meant to preserve the repo's thin, iterative style.
+`Use personas/curious-builder/PERSONA.md style: one concrete next step unless I ask for options.`

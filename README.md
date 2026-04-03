@@ -21,7 +21,7 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 2. Copy a file from `templates/`.
 3. Create one small asset.
 4. Try it in a practice area.
-5. Capture what worked in `examples/` or `evals/`.
+5. Capture what worked in `examples/` (one concrete file per skill) or in `evals/`.
 
 ## Design Rules
 

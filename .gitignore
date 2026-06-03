@@ -1,0 +1,5 @@
+# Feature workspaces are local/ephemeral. Track only the keepalive marker,
+# not the feature dirs themselves. A bare `scratchpad/` would make negation
+# impossible, so use glob + negation.
+scratchpad/*
+!scratchpad/.gitkeep

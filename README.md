@@ -17,7 +17,8 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 ## Quick Start
 
-1. Read `docs/architecture.md`.
+1. Read `docs/workflow-guide.md` to see which skills and workflows to fire and when.
+2. Read `docs/architecture.md`.
 2. Copy a file from `templates/`.
 3. Create one small asset.
 4. Try it in a practice area.

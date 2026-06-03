@@ -29,7 +29,10 @@ and `land`.
    sha, next step, blockers).
 5. **Commit gate.** A milestone is "in progress" until BOTH its tests are green
    AND its user-testable gate is met by the user. Only then commit. Never
-   auto-commit; stage by name and pause for approval.
+   auto-commit; stage by name and pause for approval. After a commit that makes a
+   *major* change (public API, storage layout, data model, config surface, or a
+   workflow/convention the docs describe), fire a background doc-refresh agent so
+   stale docs don't accrete — see "Doc refresh" below. Don't block the commit on it.
 6. **Ledger courier.** When a decision is made mid-stream, carry it into
    `decisions.md`. Classify first and confirm with the user: a **pivot**
    supersedes the affected decision and re-opens it (and revises the Goal); an
@@ -50,6 +53,26 @@ and `land`.
 - **Improved a workflow asset** → upstream to memento (see `/workflow-sync`).
 
 Never build a master `FEATURES.md` index. No blocking commit hooks.
+
+## Doc refresh (major changes only)
+
+When a commit makes a major change, spawn a background general-purpose agent to
+fix docs the change just made stale. Fire and move on — never block the commit.
+Skip it for routine changes; this is only for shifts that ripple into the docs.
+
+```
+You are a documentation updater for this repository.
+
+A code change was just made: <SUMMARY of what changed and why>
+
+Search the docs (all .md files) and source docstrings/comments for any text that now
+conflicts with or is made stale by this change. For each stale passage, edit it in place to
+reflect current truth. Do NOT rewrite healthy docs — only fix passages that are factually
+wrong or misleading given the change. Do not touch the scratchpad workspace, migration
+files, or test files.
+
+After editing, report a one-line summary of every file you changed and what you fixed.
+```
 
 ## Outputs
 

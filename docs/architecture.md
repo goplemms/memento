@@ -22,6 +22,66 @@ The current structure is intentionally small:
 - one example prompt file
 - one sample eval
 
+## Workflow kit
+
+On top of the asset library, memento is the single source of truth for a lean
+planning workflow.
+
+### The core loop
+
+Brief goal → back-and-forth to an MVP contract → build in user-testable
+milestones → graduate the durable record → archive → GC. Driven by the
+`orchestrate` skill, which composes `discussion-to-plan`, `implement`, and
+`land`.
+
+### Workflow templates (`templates/workflow/`)
+
+- `plan.md` — north-star goal · non-scope · ordered milestones, each with an
+  inline user-testable gate.
+- `PROGRESS.md` — resume/survival file: status table, current block, closeout.
+- `decisions.md` (opt-in) — ledger for contested work; supersede, never delete.
+- `agents.md` (opt-in) — per-subagent scope for the current milestone.
+
+### Structure scripts (`scripts/`)
+
+Three scripts, justified because they automate STRUCTURE (scaffolding,
+date-math GC), not judgment. Each resolves the consuming repo via
+`git rev-parse --show-toplevel`, so one copy works from any repo's cwd.
+
+- `new-feature.sh <name> [--with-agents] [--with-decisions]` — scaffold.
+- `archive-feature.sh <dir>` — date-prefixed move to `scratchpad/archive/`;
+  refuses without a complete Closeout.
+- `sweep-archive.sh [--older-than N] [--delete]` — dry-run GC of old archives;
+  flags stale active dirs but never auto-deletes them.
+
+### Install layer (`install.sh`)
+
+- `--user` (default): SYMLINK `skills/`, `personas/`, `templates/` into
+  `~/.claude` and put scripts on PATH (`~/.local/bin`). Existing targets are
+  backed up first (reversible via `--uninstall`); re-runs are idempotent.
+  Because the live files are symlinks into memento, editing them IS editing
+  memento — commit here, no backport.
+- `--vendor <repo>`: COPY version-pinned assets into a repo with a
+  `# sourced from memento@<commit>` provenance header. The only path that
+  creates forks; for team/CI, not the daily single-machine path.
+
+### Identity guarantee and the shadow landmine
+
+On a single dev machine, `--user` symlinks make the workflow byte-identical
+across every repo: each `/orchestrate`, template, and script resolves to the
+same canonical memento file. The one thing that silently breaks this is Claude
+Code's precedence — a PROJECT-scope `.claude/skills/<name>` shadows the
+user-scope copy. `install.sh`, `workflow-init`, and `workflow-sync` scan for
+such shadows and warn so identity doesn't rot.
+
+### Reverse-drift capture
+
+The primary fix is structural: symlinks mean improvements land in memento
+directly, captured during the `land` reflection. For vendored repos,
+`workflow-sync` diffs each kit-sourced asset against canonical and reconciles
+bidirectionally (repo-ahead → upstream, kit-ahead → refresh). Run it as part of
+graduation / `land` so improvements are captured the moment a feature finishes.
+
 ## Future Extension
 
 If this grows beyond Claude Code, keep the core directories the same and add agent-specific notes inside assets or under a future `platforms/` or `adapters/` area. Do not introduce a larger abstraction layer until repeated friction makes it necessary.

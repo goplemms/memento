@@ -27,3 +27,5 @@ This mirrors the phone-home rule for skills — same trust boundary, same gate.
 
 - [0001](0001-adopt-public-plugin-distribution.md) — Adopt public plugin
   distribution for the kit. *(Accepted)*
+- [0002](0002-introduce-agents-to-the-kit.md) — Introduce task-delegated agents
+  as a first-class asset type; keep personas separate. *(Accepted)*

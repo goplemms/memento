@@ -4,7 +4,9 @@ This repo treats each asset type as a simple markdown building block.
 
 ## Relationships
 
-- A `persona` shapes how the agent behaves.
+- A `persona` shapes how the agent behaves (a tone guide, carried into a session).
+- An `agent` is a task-delegated subagent: Claude Code hands it a scoped job and
+  gets back a result, in its own context window.
 - A `skill` helps the agent do one focused job well.
 - A `workflow` combines skills and personas into a repeatable sequence.
 - A `practice-area` provides a small place to test the workflow.
@@ -21,6 +23,24 @@ The current structure is intentionally small:
 - one small practice area
 - one example prompt file
 - one sample eval
+
+## Agents vs personas
+
+These look similar but are different asset types, and the split is deliberate:
+
+- A `persona` is a **tone guide** — a carried file that shapes voice and posture
+  in the main conversation. It is not delegated to; it is worn.
+- An `agent` is a **task-delegated subagent** — Claude Code routes a scoped job
+  to it, it runs in its own context window with its own tools/model, and returns
+  a result. It follows the Claude Code subagent format (YAML frontmatter:
+  `name`, `description`, optional `tools`/`model`) and is auto-discovered from
+  the plugin's `agents/` directory.
+
+Personas therefore stay as plain carried files; agents live under `agents/`. The
+first agent is `decision-adversary` — a decision-hardening subagent that
+steelmans the case against a proposed decision or plan, surfaces risks, failure
+modes, and hidden assumptions, and argues both blades so the human decides with
+full information (critique-only: no verdict, no fix). See ADR-0002.
 
 ## Workflow kit
 

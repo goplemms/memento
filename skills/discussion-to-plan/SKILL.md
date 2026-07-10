@@ -1,3 +1,8 @@
+---
+name: discussion-to-plan
+description: Turn a fuzzy feature idea from an earlier conversation into a clear goal and a single implementation plan document, without over-trusting the transcript or skipping alignment with the user. Produces the MVP contract that orchestrate builds against. Use when a prior discussion needs to become a concrete plan.
+---
+
 # Discussion to Plan
 
 ## Purpose
@@ -16,7 +21,7 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
 2. Pull out from prior discussion only what might support that hypothesis: goals, constraints, examples, and explicit non-goals. Quote or paraphrase briefly; do not paste huge blocks unless asked.
 3. Ask a small set of focused questions to resolve ambiguity. Prefer one round of tight questions over many vague ones. If the user says “good enough,” stop asking and move on.
 4. Confirm with the user which parts of the prior conversation are still relevant and which to ignore.
-5. Only after alignment, draft the plan. When this feeds the kit's workflow, write it into the workspace's `plan.md` (from `templates/workflow/plan.md`): a north-star goal, non-scope, and ordered milestones — each milestone carrying an inline user-testable gate (web → page/button · CLI → command + output · lib → invokable runner). Otherwise a short freeform plan (problem, goal, scope, approach, risks, next steps) is fine. Keep it short unless the user asks for depth.
+5. Only after alignment, draft the plan. When this feeds the kit's workflow, write it into the workspace's `plan.md` (from `${CLAUDE_PLUGIN_ROOT}/templates/workflow/plan.md`): a north-star goal, non-scope, and ordered milestones — each milestone carrying an inline user-testable gate (web → page/button · CLI → command + output · lib → invokable runner). Otherwise a short freeform plan (problem, goal, scope, approach, risks, next steps) is fine. Keep it short unless the user asks for depth.
 
 ## Outputs
 
@@ -28,4 +33,4 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
 
 Default to interactive alignment first; the transcript informs the conversation, it does not replace it. If the prior discussion is missing or thin, say so and build the plan from live answers.
 
-This skill produces the MVP contract that `orchestrate` builds against. It does not duplicate the milestone-execution loop — once `plan.md` exists, hand off to `orchestrate` / `implement`.
+This skill produces the MVP contract that `memento:orchestrate` builds against. It does not duplicate the milestone-execution loop — once `plan.md` exists, hand off to `memento:orchestrate` / `memento:implement`.

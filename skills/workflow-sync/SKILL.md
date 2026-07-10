@@ -1,3 +1,8 @@
+---
+name: workflow-sync
+description: Make drift capture one command instead of archaeology — detect when a repo's copy of a kit asset has diverged from memento's canonical version in either direction, flag project-scope skills that silently shadow the kit, and reconcile bidirectionally. Use when checking or reconciling drift between a consuming repo and the canonical kit, typically at land time.
+---
+
 # Workflow Sync
 
 ## Purpose
@@ -34,7 +39,7 @@ the user-scope kit.
      user-scope.
 4. **Reconcile on confirmation.** Apply the chosen direction; never edit
    silently. For upstreams, commit in the memento clone with a clear message.
-5. **Habit hook.** Run this as part of graduation / `/land` so a workflow-asset
+5. **Habit hook.** Run this as part of graduation / `memento:land` so a workflow-asset
    improvement is captured the same moment a feature finishes — not later.
 
 ## Outputs

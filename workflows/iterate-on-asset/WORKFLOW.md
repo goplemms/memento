@@ -6,7 +6,7 @@ Improve one asset through a small loop of drafting, trying, and revising.
 
 ## Uses
 
-- Persona: `personas/curious-builder/PERSONA.md`
+- Agent: `agents/curious-builder.md`
 - Skill: `skills/repo-exploration/SKILL.md`
 
 ## Steps

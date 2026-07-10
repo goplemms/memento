@@ -9,6 +9,6 @@ Use these as copy-paste starters. Each file is one concrete scenario for a singl
 
 ## Persona (optional)
 
-To combine with `personas/curious-builder/PERSONA.md`, add a line at the top of any prompt:
+To combine with the `curious-builder` agent (`agents/curious-builder.md`), add a line at the top of any prompt:
 
-`Use personas/curious-builder/PERSONA.md style: one concrete next step unless I ask for options.`
+`Use the curious-builder style: one concrete next step unless I ask for options.`

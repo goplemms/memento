@@ -2,7 +2,7 @@
 
 ## Asset Under Test
 
-`personas/curious-builder/PERSONA.md`
+`agents/curious-builder.md`
 
 ## Scenario
 

@@ -1,3 +1,8 @@
+---
+name: implement
+description: Execute a single milestone from plan.md to the point where its tests are green and its user-testable gate can be demonstrated. Scoped to one milestone at a time; hands back to orchestrate for the commit gate. Use when building the active milestone of a kit-driven feature.
+---
+
 # Implement
 
 ## Purpose
@@ -24,7 +29,7 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
    invoke the runner) so the user can confirm it.
 6. Update `PROGRESS.md`: move the milestone `in-progress` → `testable`, record
    the last-green sha and the next step.
-7. Hand back to `orchestrate` for the commit gate. Do not commit here.
+7. Hand back to `memento:orchestrate` for the commit gate. Do not commit here.
 
 ## Outputs
 
@@ -35,4 +40,4 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
 ## Notes
 
 Stay inside the milestone. If you discover the plan is wrong, surface it as a
-pivot/adjustment to `orchestrate` rather than silently widening scope.
+pivot/adjustment to `memento:orchestrate` rather than silently widening scope.

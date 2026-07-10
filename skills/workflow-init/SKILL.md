@@ -1,3 +1,8 @@
+---
+name: workflow-init
+description: Bootstrap a repo to use the kit's planning workflow — create the scratchpad/ workspace, wire .gitignore so feature work stays local but templates can be tracked, and surface any project-scope skills that would shadow the kit. Use once per repo before running the orchestrate loop.
+---
+
 # Workflow Init
 
 ## Purpose
@@ -9,7 +14,8 @@ tracked, and surface any project-scope skills that would shadow the kit.
 ## Inputs
 
 - A git repo (the consuming project)
-- The kit installed at user scope (so `/orchestrate` etc. already resolve)
+- The kit installed as a plugin (so `memento:orchestrate` etc. resolve and
+  `${CLAUDE_PLUGIN_ROOT}` points at the kit)
 
 ## Process
 
@@ -29,9 +35,11 @@ tracked, and surface any project-scope skills that would shadow the kit.
    kit skill names. Project-scope skills take PRECEDENCE over user-scope, so a
    committed copy silently overrides the kit. Warn for each match and offer to
    reconcile (upstream improvements to memento, then remove the fork) — or hand
-   to `/workflow-sync`.
-5. Confirm `new-feature.sh` / `archive-feature.sh` / `sweep-archive.sh` are on
-   PATH (installed by `install.sh --user`).
+   to `memento:workflow-sync`.
+5. Confirm the structure scripts resolve under the installed plugin:
+   `${CLAUDE_PLUGIN_ROOT}/bin/new-feature.sh`,
+   `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`,
+   `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh`.
 
 ## Outputs
 

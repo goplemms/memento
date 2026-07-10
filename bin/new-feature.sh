@@ -32,10 +32,16 @@ if ! REPO="$(git rev-parse --show-toplevel 2>/dev/null)"; then
   exit 1
 fi
 
-# Templates ship with the kit. Resolve them relative to this script's real path
-# so the script works whether invoked directly or via a PATH symlink.
-SCRIPT_REAL="$(readlink -f "${BASH_SOURCE[0]}")"
-KIT_ROOT="$(cd "$(dirname "$SCRIPT_REAL")/.." && pwd)"
+# Templates ship with the kit. Resolve the kit root two ways:
+#   - As a plugin, Claude Code exports CLAUDE_PLUGIN_ROOT (the plugin dir).
+#   - Otherwise (symlink install or direct run), fall back to this script's
+#     real path so it works via a PATH symlink too.
+if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
+  KIT_ROOT="$CLAUDE_PLUGIN_ROOT"
+else
+  SCRIPT_REAL="$(readlink -f "${BASH_SOURCE[0]}")"
+  KIT_ROOT="$(cd "$(dirname "$SCRIPT_REAL")/.." && pwd)"
+fi
 TPL="$KIT_ROOT/templates/workflow"
 [ -d "$TPL" ] || { echo "error: templates not found at $TPL" >&2; exit 1; }
 

@@ -26,14 +26,41 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 ## Workflow Kit
 
-memento is also the single source of truth for a lean planning workflow that
-installs into `~/.claude`.
+memento is also the single source of truth for a lean planning workflow.
 
-### Install (single machine, default)
+### Install as a plugin (recommended; works in cloud/ephemeral sessions)
+
+memento ships as a self-hosting Claude Code plugin, so it installs the same way
+everywhere — including cloud/web sessions where `~/.claude` symlinks don't exist.
+
+```sh
+/plugin marketplace add goplemms/memento
+/plugin install memento@memento
+```
+
+Or declare it in a consuming repo's `.claude/settings.json` so every session
+(including cloud sessions) auto-installs it:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "memento": { "source": { "source": "github", "repo": "goplemms/memento" } }
+  },
+  "enabledPlugins": { "memento@memento": true }
+}
+```
+
+Skills install namespaced, e.g. `memento:orchestrate`. See
+`docs/decisions/0001-adopt-public-plugin-distribution.md` for the why.
+
+### Install via symlink (single machine)
+
+For a single dev machine, the symlink install makes editing `~/.claude` the same
+as editing memento directly:
 
 ```sh
 ./install.sh --user            # symlink skills/personas/templates -> ~/.claude,
-                               # scripts -> ~/.local/bin (existing targets backed up)
+                               # bin/*.sh -> ~/.local/bin (existing targets backed up)
 ./install.sh --user --dry-run  # preview without changing anything
 ./install.sh --uninstall       # remove links, restore most recent backup
 ```

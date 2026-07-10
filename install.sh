@@ -101,7 +101,7 @@ install_user() {
     link_one "$KIT_ROOT/$d" "$CLAUDE_DIR/$d"
   done
   do_or_say "mkdir -p '$BIN_DIR'"
-  for s in "$KIT_ROOT"/scripts/*.sh; do
+  for s in "$KIT_ROOT"/bin/*.sh; do
     link_one "$s" "$BIN_DIR/$(basename "$s")"
   done
   scan_shadows
@@ -115,7 +115,7 @@ uninstall_user() {
     local t="$CLAUDE_DIR/$d"
     if [ -L "$t" ]; then do_or_say "rm '$t'"; done_msg "removed link $t"; fi
   done
-  for s in "$KIT_ROOT"/scripts/*.sh; do
+  for s in "$KIT_ROOT"/bin/*.sh; do
     local t="$BIN_DIR/$(basename "$s")"
     if [ -L "$t" ]; then do_or_say "rm '$t'"; done_msg "removed link $t"; fi
   done

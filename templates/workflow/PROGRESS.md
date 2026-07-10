@@ -1,6 +1,8 @@
 # Progress: <FEATURE_NAME>
 
-Resume/survival file. If context is lost, this page alone should let work resume.
+Resume/survival file — the one page that lets work resume after context loss.
+Keep it current; in an ephemeral container, commit or push it at each milestone
+boundary, or it won't survive a disposable workspace.
 
 ## Status
 

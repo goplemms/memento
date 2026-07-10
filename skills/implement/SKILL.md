@@ -1,7 +1,7 @@
 ---
 name: implement
 description: Execute a single milestone from plan.md until its tests are green and its user-testable gate can be demonstrated — one milestone at a time, smallest change first, no committing. Use when building one planned milestone; hands back to orchestrate for the commit gate.
-when_to_use: Executing one milestone from plan.md; the user asks to build or implement the next planned slice until it's green and demonstrable.
+when_to_use: Executing ONE already-planned milestone from an existing plan.md until it's green and demonstrable. Requires plan.md and PROGRESS.md; to plan first or drive the whole feature, use orchestrate.
 ---
 
 # Implement
@@ -17,6 +17,10 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
 - `PROGRESS.md` current block (last-green sha, next step, blockers)
 - Optional `agents.md` if the milestone is split across subagents
 
+If `plan.md` or `PROGRESS.md` is absent, the feature workspace was never
+scaffolded — stop and run `new-feature.sh <name>` first (`workflow-init` sets up
+the repo but does NOT create these files).
+
 ## Process
 
 1. Read the active milestone and its user-testable gate. Restate what "done"
@@ -29,7 +33,8 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
 5. Demonstrate the user-testable gate (run the command, point at the page,
    invoke the runner) so the user can confirm it.
 6. Update `PROGRESS.md`: move the milestone `in-progress` → `testable`, record
-   the last-green sha and the next step.
+   the last-green sha and the next step. In an ephemeral environment, commit or
+   push `PROGRESS.md` here so the survival file outlives a disposable container.
 7. Hand back to `orchestrate` for the commit gate. Do not commit here.
 
 ## Outputs

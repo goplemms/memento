@@ -45,4 +45,6 @@ if [ -e "$DEST" ]; then
 fi
 
 mv "$SRC" "$DEST"
-echo "archived: $DEST"
+# Stamp the Closeout's Archived: field so the durable record matches reality.
+sed -i -E "s|^([[:space:]]*- \*\*Archived:\*\*).*|\1 ${STAMP}|" "$DEST/PROGRESS.md"
+echo "archived: $DEST (Archived: ${STAMP})"

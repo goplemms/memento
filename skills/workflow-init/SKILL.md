@@ -20,7 +20,9 @@ tracked, and surface any project-scope skills that would shadow the kit.
 ## Process
 
 1. Confirm the repo via `git rev-parse --show-toplevel`. Fail loud if not a repo.
-2. Create `scratchpad/` and `scratchpad/archive/` if absent.
+2. Create `scratchpad/` and `scratchpad/archive/` if absent, plus an empty
+   `scratchpad/.gitkeep` so the directory is tracked (the `.gitignore` negation
+   below re-includes exactly this file).
 3. Wire `.gitignore`. A `.gitignore` CANNOT re-include paths under an excluded
    directory, so use a glob + negation, not a bare `scratchpad/`:
 

@@ -1,7 +1,7 @@
 ---
 name: orchestrate
 description: Drive a feature end-to-end through the kit's lean planning loop — brief the goal, converge on an MVP contract, build in user-testable milestones, land, and graduate the durable record. The top-level workflow; composes discussion-to-plan, implement, and land. Use when taking a feature from a fuzzy goal to a merged, durable result.
-when_to_use: Driving a feature start to finish; the user asks to plan and build something end-to-end, or to run the full memento loop.
+when_to_use: Driving a whole feature from a goal to merged — multiple milestones, planning included, or the full memento loop. For executing a single already-planned milestone, use implement instead.
 ---
 
 # Orchestrate
@@ -19,12 +19,16 @@ and `land`.
 - A feature goal (often fuzzy) and the repo it lives in
 - The kit installed as a plugin (so `memento:orchestrate` resolves to this
   canonical file)
-- A `scratchpad/` workspace (run `new-feature.sh` or the `workflow-init` skill first)
+- A scaffolded feature workspace `scratchpad/<name>/` with `plan.md` +
+  `PROGRESS.md`, created by `new-feature.sh <name>`. (`workflow-init` bootstraps
+  the repo once and does NOT scaffold the feature files — run it first only if
+  the repo isn't set up yet.)
 
 ## Process
 
 1. **Brief.** Restate the goal in one sentence as a hypothesis. Confirm the repo
-   and the workspace dir.
+   and the workspace dir; if `scratchpad/<name>/` (with `plan.md` + `PROGRESS.md`)
+   doesn't exist yet, scaffold it with `new-feature.sh <name>` before continuing.
 2. **Contract.** Use `discussion-to-plan` to converge on an MVP contract:
    north-star goal, non-scope, and ordered milestones. Write `plan.md`. Each
    milestone MUST carry an inline user-testable gate (web → page/button · CLI →
@@ -41,7 +45,8 @@ and `land`.
    workflow/convention the docs describe), fire a background doc-refresh agent so
    stale docs don't accrete — see "Doc refresh" below. Don't block the commit on it.
 6. **Ledger courier.** When a decision is made mid-stream, carry it into
-   `decisions.md`. Classify first and confirm with the user: a **pivot**
+   `decisions.md` (if it wasn't scaffolded at step 3, create it from the template
+   first). Classify first and confirm with the user: a **pivot**
    supersedes the affected decision and re-opens it (and revises the Goal); an
    **adjustment** adds a new milestone (Goal untouched). Superseded entries are
    never deleted — they keep a "Superseded by" link.

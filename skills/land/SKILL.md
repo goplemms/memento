@@ -29,7 +29,9 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 3. **Capture improvements.** If a workflow asset should change, upstream it via a
    **phone-home PR**: open a PR against the memento repo through the GitHub API,
    kept project-neutral (generalize-or-reject, category-only provenance, scan the
-   diff *and* PR text) and left for human approval. See ADR-0001 / ADR-0003.
+   diff *and* PR text) and left for human approval. If you lack push access to
+   memento (a third-party install), fork it first and PR from the fork. See
+   ADR-0001 / ADR-0003.
 4. **Graduate.** Decide where the durable record lives (see `orchestrate`
    graduation routing); propose, let the user confirm. Fill `PROGRESS.md`
    Closeout (Graduated to / Archived).

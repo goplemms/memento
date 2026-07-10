@@ -67,6 +67,12 @@ proposed fix — the decision stays with the human).
   the persona-vs-agent line has to be held so the two directories don't blur.
   Agents also carry format coupling to Claude Code's subagent spec; a spec change
   is now something the kit tracks.
+- **Operational (the `decision-adversary` `model: opus` pin):** on a session or
+  plan where opus is unavailable, Claude Code skips the excluded model and runs
+  the subagent on the session's inherited model — a *silent downgrade*, not a
+  failure. So the pin is a quality preference, not a guarantee: on a capped
+  session the steelman runs at the session model's quality. Acceptable, and worth
+  knowing before relying on it.
 - **Revisit when:** agents accumulate enough that they need their own conventions
   doc or template (as skills and ADRs have), or if the persona/agent distinction
   stops paying for itself in practice — at which point supersede with a

@@ -30,7 +30,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 2. **Discussion to Plan** — synthesize the prior discussion, align with user, produce a plan document
 
 ### Driving a full feature (the main loop)
-1. `new-feature.sh <name>` (or `/workflow-init` if the repo isn't set up yet) — scaffold the workspace
+1. `new-feature.sh <name>` (or the **Workflow Init** skill if the repo isn't set up yet) — scaffold the workspace
 2. **Orchestrate** — runs the full loop internally:
    - Calls **Discussion to Plan** to write `plan.md` with milestones and user-testable gates
    - Calls **Implement** once per milestone until tests are green and the gate is met
@@ -78,6 +78,7 @@ Improving an existing skill/persona/eval?
 
 ## Notes
 
+- **Invoking skills:** under the plugin install (the primary channel) skills fire namespaced as `memento:<name>` — e.g. `memento:orchestrate`; under a `--user` symlink install they fire bare as `/<name>`. This guide names skills without a prefix; add the one your install uses.
 - **Orchestrate** is the top-level entry point for feature work — it composes all the other skills.
 - Skills are self-contained; fire them individually when you only need that piece.
 - If unsure, start with **Repo Exploration** — it is intentionally conservative and cheap to run.

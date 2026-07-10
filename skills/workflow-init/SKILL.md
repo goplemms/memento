@@ -9,7 +9,8 @@ tracked, and surface any project-scope skills that would shadow the kit.
 ## Inputs
 
 - A git repo (the consuming project)
-- The kit installed at user scope (so `/orchestrate` etc. already resolve)
+- The kit installed (plugin: `memento:orchestrate` etc.; symlink at user scope:
+  `/orchestrate` etc.) so skills already resolve
 
 ## Process
 
@@ -29,7 +30,7 @@ tracked, and surface any project-scope skills that would shadow the kit.
    kit skill names. Project-scope skills take PRECEDENCE over user-scope, so a
    committed copy silently overrides the kit. Warn for each match and offer to
    reconcile (upstream improvements to memento, then remove the fork) — or hand
-   to `/workflow-sync`.
+   to the `workflow-sync` skill.
 5. Confirm `new-feature.sh` / `archive-feature.sh` / `sweep-archive.sh` are on
    PATH (installed by `install.sh --user`).
 

@@ -11,8 +11,9 @@ and `land`.
 ## Inputs
 
 - A feature goal (often fuzzy) and the repo it lives in
-- The kit installed (so `/orchestrate` resolves to this canonical file)
-- A `scratchpad/` workspace (run `new-feature.sh` or `/workflow-init` first)
+- The kit installed (plugin: `memento:orchestrate`; symlink: `/orchestrate`) so
+  this canonical file resolves
+- A `scratchpad/` workspace (run `new-feature.sh` or the `workflow-init` skill first)
 
 ## Process
 
@@ -50,7 +51,11 @@ and `land`.
 - **Lasting design decision** → the repo's architecture/decision doc.
 - **User-facing change** → README / guides.
 - **Spike** → nothing; let it be archived.
-- **Improved a workflow asset** → upstream to memento (see `/workflow-sync`).
+- **Improved a workflow asset** → upstream to memento. On a symlink install the
+  asset file is a symlink into memento — edit and commit it there (see the
+  `workflow-sync` skill). On a plugin/cloud install there is no local clone:
+  open a phone-home PR against memento via the GitHub API, kept project-neutral
+  and human-approved (see ADR-0001).
 
 Never build a master `FEATURES.md` index. No blocking commit hooks.
 

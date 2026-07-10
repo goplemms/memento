@@ -33,8 +33,11 @@ the user-scope kit.
    - **shadow with no real diff** → offer to REMOVE the fork and fall back to
      user-scope.
 4. **Reconcile on confirmation.** Apply the chosen direction; never edit
-   silently. For upstreams, commit in the memento clone with a clear message.
-5. **Habit hook.** Run this as part of graduation / `/land` so a workflow-asset
+   silently. For upstreams on a symlink install, commit in the memento clone
+   with a clear message; on a plugin/cloud install there is no clone — upstream
+   via a phone-home PR against memento (GitHub API, project-neutral,
+   human-approved; see ADR-0001).
+5. **Habit hook.** Run this as part of graduation / the `land` skill so a workflow-asset
    improvement is captured the same moment a feature finishes — not later.
 
 ## Outputs

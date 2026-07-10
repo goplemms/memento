@@ -10,7 +10,7 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 
 - A feature whose milestones are all `done` (green + gates met)
 - The feature workspace (`plan.md`, `PROGRESS.md`)
-- The kit installed (so edits to skills are edits to memento)
+- The kit installed as a plugin
 
 ## Process
 
@@ -20,25 +20,21 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier
      (prompting/planning)?
-3. **Capture improvements.** If a workflow asset should change:
-   - Under `--user` install, the skill/template/persona file is a symlink into
-     memento — editing it IS editing memento. Make the edit, then commit it in
-     the memento clone. No backport.
-   - If the repo carries a vendored/forked copy instead, hand off to
-     `/workflow-sync` to upstream it (repo → memento).
-4. **Sync check.** Run `/workflow-sync` to detect any drift (including
-   project-scope skills that shadow the kit) and reconcile.
-5. **Graduate.** Decide where the durable record lives (see `orchestrate`
+3. **Capture improvements.** If a workflow asset should change, upstream it via a
+   **phone-home PR**: open a PR against the memento repo through the GitHub API,
+   kept project-neutral (generalize-or-reject, category-only provenance, scan the
+   diff *and* PR text) and left for human approval. See ADR-0001 / ADR-0003.
+4. **Graduate.** Decide where the durable record lives (see `orchestrate`
    graduation routing); propose, let the user confirm. Fill `PROGRESS.md`
    Closeout (Graduated to / Archived).
-6. **Archive + sweep.** Run `archive-feature.sh <dir>` (refuses without a
+5. **Archive + sweep.** Run `archive-feature.sh <dir>` (refuses without a
    complete Closeout), then `sweep-archive.sh` to GC old archives.
 
 ## Outputs
 
 - Merged feature
 - A reflection note (what helped / didn't)
-- Any improved workflow asset committed back to memento
+- Any improved workflow asset upstreamed to memento via a phone-home PR
 - A completed Closeout, archived workspace, swept archive
 
 ## Notes

@@ -29,3 +29,6 @@ This mirrors the phone-home rule for skills — same trust boundary, same gate.
   distribution for the kit. *(Accepted)*
 - [0002](0002-introduce-agents-to-the-kit.md) — Introduce task-delegated agents
   as a first-class asset type; keep personas separate. *(Accepted)*
+- [0003](0003-plugin-only-distribution.md) — Retire the symlink install; make
+  the plugin the sole channel. *(Accepted; supersedes the install-distribution
+  parts of ADR-0001)*

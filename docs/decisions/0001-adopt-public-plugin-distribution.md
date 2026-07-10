@@ -2,6 +2,9 @@
 
 - **Status:** Accepted
 - **Date:** 2026-07-10
+- **Update:** the `--user` symlink and `--vendor` install paths described here as
+  kept "in reserve" are retired by [ADR-0003](0003-plugin-only-distribution.md);
+  the plugin is now the sole channel. The plugin decision itself stands.
 
 ## Context
 

@@ -34,8 +34,7 @@ fi
 
 # Templates ship with the kit. Resolve the kit root two ways:
 #   - As a plugin, Claude Code exports CLAUDE_PLUGIN_ROOT (the plugin dir).
-#   - Otherwise (symlink install or direct run), fall back to this script's
-#     real path so it works via a PATH symlink too.
+#   - Otherwise (direct run from a clone), fall back to this script's real path.
 if [ -n "${CLAUDE_PLUGIN_ROOT:-}" ]; then
   KIT_ROOT="$CLAUDE_PLUGIN_ROOT"
 else

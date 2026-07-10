@@ -13,8 +13,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Orchestrate** skill | `skills/orchestrate/SKILL.md` | Driving a feature end-to-end (composes Discussion to Plan, Implement, and Land) |
 | **Implement** skill | `skills/implement/SKILL.md` | Executing a single milestone from `plan.md` until tests are green and the gate is demonstrable |
 | **Land** skill | `skills/land/SKILL.md` | Closing out a finished feature: merging, reflection, and capturing workflow improvements |
-| **Workflow Init** skill | `skills/workflow-init/SKILL.md` | Bootstrapping a repo to use the kit (creates `scratchpad/`, wires `.gitignore`, checks for shadows) |
-| **Workflow Sync** skill | `skills/workflow-sync/SKILL.md` | Detecting and reconciling drift between a repo's vendored skill copies and the canonical kit |
+| **Workflow Init** skill | `skills/workflow-init/SKILL.md` | Bootstrapping a repo to use the kit (creates `scratchpad/`, wires `.gitignore`, checks for stale skill copies) |
 | **Iterate on Asset** workflow | `workflows/iterate-on-asset/WORKFLOW.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
 
 ---
@@ -30,7 +29,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 2. **Discussion to Plan** — synthesize the prior discussion, align with user, produce a plan document
 
 ### Driving a full feature (the main loop)
-1. `new-feature.sh <name>` (or `/workflow-init` if the repo isn't set up yet) — scaffold the workspace
+1. `new-feature.sh <name>` (or the **Workflow Init** skill if the repo isn't set up yet) — scaffold the workspace
 2. **Orchestrate** — runs the full loop internally:
    - Calls **Discussion to Plan** to write `plan.md` with milestones and user-testable gates
    - Calls **Implement** once per milestone until tests are green and the gate is met
@@ -38,11 +37,11 @@ A step-by-step reference for which skills and workflows to fire, and when.
 3. `archive-feature.sh <name>` then `sweep-archive.sh` — clean up the scratchpad
 
 ### Setting up a repo for the first time
-1. `./install.sh --user` (once, on the machine) — symlink kit assets into `~/.claude`
-2. **Workflow Init** — bootstrap `scratchpad/`, `.gitignore`, and shadow scan in the target repo
+1. Enable the memento plugin (`/plugin marketplace add goplemms/memento` then `/plugin install memento@memento`, or declare it in the repo's `.claude/settings.json`)
+2. **Workflow Init** — bootstrap `scratchpad/`, `.gitignore`, and the shadow check in the target repo
 
 ### After improving a skill mid-feature
-1. **Workflow Sync** — called automatically by **Land**; also run manually anytime to catch drift
+1. Upstream it to memento with a **phone-home PR** (see **Land**) — project-neutral, human-approved
 
 ### Improving an asset outside of a feature
 1. **Iterate on Asset** workflow — draft, try in a practice area, capture eval, revise
@@ -62,13 +61,13 @@ Driving a feature start-to-finish?
   └─ Yes → Orchestrate (includes Discussion to Plan → Implement → Land)
 
 Finishing and merging a feature?
-  └─ Yes → Land  (includes Workflow Sync)
+  └─ Yes → Land
 
 Repo not yet set up for the kit?
-  └─ Yes → install.sh --user, then Workflow Init
+  └─ Yes → enable the memento plugin, then Workflow Init
 
-Suspected drift between repo copy and canonical kit?
-  └─ Yes → Workflow Sync
+Improved a kit asset and want it upstream?
+  └─ Yes → phone-home PR (see Land)
 
 Improving an existing skill/persona/eval?
   └─ Yes → Iterate on Asset workflow
@@ -78,7 +77,8 @@ Improving an existing skill/persona/eval?
 
 ## Notes
 
+- **Invoking skills:** the kit installs as a plugin, so skills fire namespaced as `memento:<name>` — e.g. `memento:orchestrate`. This guide names skills without the prefix; add `memento:` when you invoke one.
 - **Orchestrate** is the top-level entry point for feature work — it composes all the other skills.
 - Skills are self-contained; fire them individually when you only need that piece.
 - If unsure, start with **Repo Exploration** — it is intentionally conservative and cheap to run.
-- Under `--user` symlink install, editing a skill in `~/.claude` IS editing memento directly.
+- Improvements to a kit asset go home as a **phone-home PR** against memento — project-neutral, human-approved.

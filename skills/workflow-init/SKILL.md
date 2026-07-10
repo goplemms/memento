@@ -9,7 +9,7 @@ tracked, and surface any project-scope skills that would shadow the kit.
 ## Inputs
 
 - A git repo (the consuming project)
-- The kit installed at user scope (so `/orchestrate` etc. already resolve)
+- The memento plugin enabled (so `memento:orchestrate` etc. already resolve)
 
 ## Process
 
@@ -25,22 +25,22 @@ tracked, and surface any project-scope skills that would shadow the kit.
 
    Feature dirs stay untracked by default; adjust negations if a repo wants to
    track specific workspaces.
-4. **Shadow scan.** Check for `.claude/skills/<name>` in this repo that match
-   kit skill names. Project-scope skills take PRECEDENCE over user-scope, so a
-   committed copy silently overrides the kit. Warn for each match and offer to
-   reconcile (upstream improvements to memento, then remove the fork) — or hand
-   to `/workflow-sync`.
-5. Confirm `new-feature.sh` / `archive-feature.sh` / `sweep-archive.sh` are on
-   PATH (installed by `install.sh --user`).
+4. **Shadow check.** Look for `.claude/skills/<name>` in this repo that duplicate
+   a kit skill. With plugin namespacing these no longer *collide* (a project
+   `/<name>` is distinct from `memento:<name>`), but a stale local copy of a kit
+   skill is drift waiting to happen — flag each so it can be deleted in favour of
+   the enabled plugin.
+5. Confirm the memento plugin is enabled: its `bin/` puts `new-feature.sh` /
+   `archive-feature.sh` / `sweep-archive.sh` on the Bash tool's PATH.
 
 ## Outputs
 
 - A `scratchpad/` workspace with archive subdir
 - A `.gitignore` using glob + negation (not a bare excluded dir)
-- A report of any project-scope shadows to reconcile
+- A report of any project-scope skill copies to delete in favour of the plugin
 
 ## Notes
 
-Prefer user-scope symlinks over per-repo copies. The only reason to vendor into
-a repo is a concrete team/CI need; otherwise repos should stay fork-free so the
-workflow is identical everywhere on the machine.
+The kit installs as a plugin — no per-repo copies, no forks. A repo only needs
+its `scratchpad/` workspace wired; the skills, agents, and scripts all come from
+the enabled plugin, identically everywhere.

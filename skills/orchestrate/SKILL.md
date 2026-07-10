@@ -11,8 +11,9 @@ and `land`.
 ## Inputs
 
 - A feature goal (often fuzzy) and the repo it lives in
-- The kit installed (so `/orchestrate` resolves to this canonical file)
-- A `scratchpad/` workspace (run `new-feature.sh` or `/workflow-init` first)
+- The kit installed as a plugin (so `memento:orchestrate` resolves to this
+  canonical file)
+- A `scratchpad/` workspace (run `new-feature.sh` or the `workflow-init` skill first)
 
 ## Process
 
@@ -50,7 +51,10 @@ and `land`.
 - **Lasting design decision** → the repo's architecture/decision doc.
 - **User-facing change** → README / guides.
 - **Spike** → nothing; let it be archived.
-- **Improved a workflow asset** → upstream to memento (see `/workflow-sync`).
+- **Improved a workflow asset** → upstream to memento via a **phone-home PR**:
+  open a PR against the memento repo through the GitHub API, kept project-neutral
+  (generalize-or-reject, category-only provenance, scan the diff *and* PR text)
+  and left for human approval. See ADR-0001 / ADR-0003.
 
 Never build a master `FEATURES.md` index. No blocking commit hooks.
 

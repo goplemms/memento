@@ -74,42 +74,28 @@ date-math GC), not judgment. Each resolves the consuming repo via
 - `sweep-archive.sh [--older-than N] [--delete]` — dry-run GC of old archives;
   flags stale active dirs but never auto-deletes them.
 
-### Install layer (`install.sh`)
+### Plugin packaging (`.claude-plugin/`) — the install channel
 
-- `--user` (default): SYMLINK `skills/`, `personas/`, `templates/` into
-  `~/.claude` and put scripts on PATH (`~/.local/bin`). Existing targets are
-  backed up first (reversible via `--uninstall`); re-runs are idempotent.
-  Because the live files are symlinks into memento, editing them IS editing
-  memento — commit here, no backport.
-- `--vendor <repo>`: COPY version-pinned assets into a repo with a
-  `# sourced from memento@<commit>` provenance header. The only path that
-  creates forks; for team/CI, not the daily single-machine path.
+memento installs as a self-hosting Claude Code plugin, and this is the *only*
+install channel (ADR-0003). `.claude-plugin/plugin.json` is the manifest and
+`.claude-plugin/marketplace.json` a one-entry marketplace pointing at this repo
+root. Installed as a plugin: `skills/` load namespaced (`memento:<name>`),
+`agents/` auto-discover, `bin/` goes on the Bash tool's PATH, and scripts resolve
+the kit root via `CLAUDE_PLUGIN_ROOT`. It installs the same way everywhere,
+including ephemeral/web sessions. See ADR-0001 and ADR-0003.
 
-### Plugin packaging (`.claude-plugin/`)
+Personas are not a Claude Code plugin primitive; they are carried tone-guide
+files shipped in the plugin and referenced from a consuming repo via
+`${CLAUDE_PLUGIN_ROOT}/personas/…`.
 
-memento is also a self-hosting Claude Code plugin: `.claude-plugin/plugin.json`
-(the plugin manifest) and `.claude-plugin/marketplace.json` (a one-entry
-marketplace pointing at this repo root). Installed as a plugin, `skills/` load
-namespaced (`memento:<name>`), `bin/` goes on PATH, and scripts resolve the kit
-root via `CLAUDE_PLUGIN_ROOT`. This is the cloud-first channel — it installs in
-ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
+### Distribution and drift
 
-### Identity guarantee and the shadow landmine
-
-On a single dev machine, `--user` symlinks make the workflow byte-identical
-across every repo: each `/orchestrate`, template, and script resolves to the
-same canonical memento file. The one thing that silently breaks this is Claude
-Code's precedence — a PROJECT-scope `.claude/skills/<name>` shadows the
-user-scope copy. `install.sh`, `workflow-init`, and `workflow-sync` scan for
-such shadows and warn so identity doesn't rot.
-
-### Reverse-drift capture
-
-The primary fix is structural: symlinks mean improvements land in memento
-directly, captured during the `land` reflection. For vendored repos,
-`workflow-sync` diffs each kit-sourced asset against canonical and reconciles
-bidirectionally (repo-ahead → upstream, kit-ahead → refresh). Run it as part of
-graduation / `land` so improvements are captured the moment a feature finishes.
+One channel, one version — every repo resolves the same installed plugin, so
+there are no forks to reconcile. An improvement discovered mid-feature goes home
+as a **phone-home PR** against memento (GitHub API, project-neutral,
+human-approved), captured during the `land` reflection. This replaces both the
+old symlink-commit loop (which never worked in the cloud) and the `--vendor` /
+`workflow-sync` drift machinery, now retired.
 
 ## Future Extension
 

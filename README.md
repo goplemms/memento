@@ -30,10 +30,10 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 memento is also the single source of truth for a lean planning workflow.
 
-### Install as a plugin (recommended; works in cloud/ephemeral sessions)
+### Install (as a plugin)
 
-memento ships as a self-hosting Claude Code plugin, so it installs the same way
-everywhere — including cloud/web sessions where `~/.claude` symlinks don't exist.
+memento ships as a self-hosting Claude Code plugin — the sole install channel.
+It installs the same way everywhere, including cloud/web sessions.
 
 ```sh
 /plugin marketplace add goplemms/memento
@@ -52,38 +52,23 @@ Or declare it in a consuming repo's `.claude/settings.json` so every session
 }
 ```
 
-Skills install namespaced, e.g. `memento:orchestrate`. See
-`docs/decisions/0001-adopt-public-plugin-distribution.md` for the why.
-
-### Install via symlink (single machine)
-
-For a single dev machine, the symlink install makes editing `~/.claude` the same
-as editing memento directly:
-
-```sh
-./install.sh --user            # symlink skills/personas/templates -> ~/.claude,
-                               # bin/*.sh -> ~/.local/bin (existing targets backed up)
-./install.sh --user --dry-run  # preview without changing anything
-./install.sh --uninstall       # remove links, restore most recent backup
-```
-
-Because the install symlinks the live files, editing a skill in `~/.claude` IS
-editing memento — commit it here and every repo on the machine sees it. Ensure
-`~/.local/bin` is on your `PATH`.
+Skills install namespaced, e.g. `memento:orchestrate`; the plugin's `bin/`
+scripts (`new-feature.sh` etc.) are on the Bash tool's PATH. See
+`docs/decisions/0001-adopt-public-plugin-distribution.md` and
+`docs/decisions/0003-plugin-only-distribution.md` for the why.
 
 ### Daily loop
 
 ```sh
 new-feature.sh my-feature --with-decisions   # scaffold scratchpad/my-feature
-# ... drive with /orchestrate: plan.md -> milestones -> /land reflection ...
+# ... drive with memento:orchestrate: plan.md -> milestones -> memento:land ...
 archive-feature.sh my-feature                # refuses without a Closeout
 sweep-archive.sh                             # dry-run GC of old archives
 ```
 
 The workflow is identical across every repo because they all resolve the same
-symlinked canonical files. The one thing that breaks this — a project-scope
-`.claude/skills/<name>` shadowing the kit — is detected and warned about by
-`install.sh`, `/workflow-init`, and `/workflow-sync`.
+plugin version. Improvements to a kit asset go home as a **phone-home PR**
+against memento — project-neutral and human-approved.
 
 ## Design Rules
 

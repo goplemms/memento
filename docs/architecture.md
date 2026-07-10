@@ -4,9 +4,13 @@ This repo treats each asset type as a simple markdown building block.
 
 ## Relationships
 
-- A `persona` shapes how the agent behaves.
-- A `skill` helps the agent do one focused job well.
-- A `workflow` combines skills and personas into a repeatable sequence.
+- A `persona` shapes how the agent behaves. Personas live in `agents/` and
+  propagate as Claude Code subagents (`memento:<name>`).
+- A `skill` helps the agent do one focused job well (`skills/`, `memento:<name>`).
+- A `workflow` combines skills and personas into a repeatable sequence. It is
+  authored AS a skill (a plugin has no separate `workflows/` channel), so
+  workflows also live in `skills/` — `orchestrate` and `iterate-on-asset` are
+  the two today.
 - A `practice-area` provides a small place to test the workflow.
 - An `example` shows how to invoke the asset in Claude Code.
 - An `eval` records a simple way to check whether the asset was useful.
@@ -56,7 +60,7 @@ date-math GC), not judgment. Each resolves the consuming repo via
 
 ### Install layer (`install.sh`)
 
-- `--user` (default): SYMLINK `skills/`, `personas/`, `templates/` into
+- `--user` (default): SYMLINK `skills/`, `agents/`, `templates/` into
   `~/.claude` and put scripts on PATH (`~/.local/bin`). Existing targets are
   backed up first (reversible via `--uninstall`); re-runs are idempotent.
   Because the live files are symlinks into memento, editing them IS editing
@@ -69,9 +73,12 @@ date-math GC), not judgment. Each resolves the consuming repo via
 
 memento is also a self-hosting Claude Code plugin: `.claude-plugin/plugin.json`
 (the plugin manifest) and `.claude-plugin/marketplace.json` (a one-entry
-marketplace pointing at this repo root). Installed as a plugin, `skills/` load
-namespaced (`memento:<name>`), `bin/` goes on PATH, and scripts resolve the kit
-root via `CLAUDE_PLUGIN_ROOT`. This is the cloud-first channel — it installs in
+marketplace pointing at this repo root). Installed as a plugin, `skills/` and
+`agents/` load namespaced (`memento:<name>`), `bin/` goes on PATH, and scripts
+resolve the kit root via `CLAUDE_PLUGIN_ROOT`. A plugin propagates only these
+channels (skills, agents, commands, hooks, MCP servers) — there is no
+`workflows/` or `personas/` channel, which is why personas live in `agents/`
+and workflows are authored as skills. This is the cloud-first channel — it installs in
 ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
 
 ### Identity guarantee and the shadow landmine

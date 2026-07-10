@@ -6,14 +6,19 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 ## What Lives Here
 
-- `skills/`: reusable instructions for a focused task
-- `workflows/`: short multi-step patterns that compose assets
-- `personas/`: reusable role and tone definitions
+- `skills/`: reusable instructions for a focused task (propagate as `memento:<name>`)
+- `agents/`: personas — reusable role and tone definitions, loaded as subagents (`memento:<name>`)
 - `practice-areas/`: small sandboxes for trying prompts and workflows
 - `examples/`: concise usage examples for Claude Code
 - `evals/`: lightweight checks for whether an asset is helping
 - `templates/`: starter shapes for writing new assets
+- `bin/`: structure scripts, added to `PATH` when installed as a plugin
 - `docs/`: small notes about structure and evolution
+
+A **workflow** — a repeatable sequence that composes skills and personas — is
+authored as a skill, not a separate directory: a plugin only propagates skills,
+agents, commands, hooks, and MCP servers. `orchestrate` and `iterate-on-asset`
+are the kit's workflows, and both live in `skills/`.
 
 ## Quick Start
 
@@ -59,7 +64,7 @@ For a single dev machine, the symlink install makes editing `~/.claude` the same
 as editing memento directly:
 
 ```sh
-./install.sh --user            # symlink skills/personas/templates -> ~/.claude,
+./install.sh --user            # symlink skills/agents/templates -> ~/.claude,
                                # bin/*.sh -> ~/.local/bin (existing targets backed up)
 ./install.sh --user --dry-run  # preview without changing anything
 ./install.sh --uninstall       # remove links, restore most recent backup

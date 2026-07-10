@@ -5,7 +5,8 @@
       "source": {
         "source": "github",
         "repo": "goplemms/memento"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "enabledPlugins": [

@@ -8,6 +8,8 @@ It starts thin on purpose. The goal is to capture useful shapes, try them in pra
 
 - `skills/`: reusable instructions for a focused task
 - `workflows/`: short multi-step patterns that compose assets
+- `agents/`: task-delegated subagents Claude Code can hand a job to (e.g.
+  `decision-adversary`)
 - `personas/`: reusable role and tone definitions
 - `practice-areas/`: small sandboxes for trying prompts and workflows
 - `examples/`: concise usage examples for Claude Code

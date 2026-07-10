@@ -1,7 +1,7 @@
 {
   "name": "memento",
-  "description": "A thin, Claude-first workflow kit: planning skills (orchestrate, discussion-to-plan, implement, land), templates, personas, and structure scripts for driving features end-to-end.",
-  "version": "0.1.0",
+  "description": "A thin, Claude-first workflow kit: planning skills (orchestrate, discussion-to-plan, implement, land), a decision-hardening adversary agent, templates, personas, and structure scripts for driving features end-to-end.",
+  "version": "0.2.0",
   "author": { "name": "goplemms" },
   "homepage": "https://github.com/goplemms/memento",
   "repository": "https://github.com/goplemms/memento"

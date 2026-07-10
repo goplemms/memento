@@ -42,7 +42,7 @@ milestones → graduate the durable record → archive → GC. Driven by the
 - `decisions.md` (opt-in) — ledger for contested work; supersede, never delete.
 - `agents.md` (opt-in) — per-subagent scope for the current milestone.
 
-### Structure scripts (`scripts/`)
+### Structure scripts (`bin/`)
 
 Three scripts, justified because they automate STRUCTURE (scaffolding,
 date-math GC), not judgment. Each resolves the consuming repo via
@@ -64,6 +64,15 @@ date-math GC), not judgment. Each resolves the consuming repo via
 - `--vendor <repo>`: COPY version-pinned assets into a repo with a
   `# sourced from memento@<commit>` provenance header. The only path that
   creates forks; for team/CI, not the daily single-machine path.
+
+### Plugin packaging (`.claude-plugin/`)
+
+memento is also a self-hosting Claude Code plugin: `.claude-plugin/plugin.json`
+(the plugin manifest) and `.claude-plugin/marketplace.json` (a one-entry
+marketplace pointing at this repo root). Installed as a plugin, `skills/` load
+namespaced (`memento:<name>`), `bin/` goes on PATH, and scripts resolve the kit
+root via `CLAUDE_PLUGIN_ROOT`. This is the cloud-first channel — it installs in
+ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
 
 ### Identity guarantee and the shadow landmine
 

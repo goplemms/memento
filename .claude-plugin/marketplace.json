@@ -1,0 +1,11 @@
+{
+  "name": "memento",
+  "owner": { "name": "goplemms" },
+  "plugins": [
+    {
+      "name": "memento",
+      "source": "./",
+      "description": "The memento workflow kit — planning skills, templates, personas, and structure scripts."
+    }
+  ]
+}

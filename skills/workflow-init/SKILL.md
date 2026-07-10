@@ -1,3 +1,9 @@
+---
+name: workflow-init
+description: Bootstrap a repo to use the kit's planning workflow — create the scratchpad/ workspace, wire .gitignore, and flag any stale local copies of kit skills. Use when a repo isn't set up for the memento workflow yet.
+when_to_use: Setting up a new repo for the memento workflow; scratchpad/ or .gitignore isn't wired yet; before the first new-feature.sh in a repo.
+---
+
 # Workflow Init
 
 ## Purpose

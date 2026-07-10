@@ -1,3 +1,9 @@
+---
+name: orchestrate
+description: Drive a feature end-to-end through the kit's lean planning loop — brief the goal, converge on an MVP contract, build in user-testable milestones, land, and graduate the durable record. The top-level workflow; composes discussion-to-plan, implement, and land. Use when taking a feature from a fuzzy goal to a merged, durable result.
+when_to_use: Driving a feature start to finish; the user asks to plan and build something end-to-end, or to run the full memento loop.
+---
+
 # Orchestrate
 
 ## Purpose

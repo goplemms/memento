@@ -1,3 +1,9 @@
+---
+name: discussion-to-plan
+description: Turn a fuzzy feature idea from earlier conversation into a clear goal and a single implementation plan (plan.md) — synthesize the discussion, align with the user in one tight round of questions, then write ordered milestones with user-testable gates. Use when a fuzzy idea needs to become a concrete plan.
+when_to_use: A prior discussion or transcript needs to become a concrete plan document; the user asks to turn an idea into a plan or MVP contract before building.
+---
+
 # Discussion to Plan
 
 ## Purpose

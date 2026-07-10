@@ -1,3 +1,9 @@
+---
+name: implement
+description: Execute a single milestone from plan.md until its tests are green and its user-testable gate can be demonstrated — one milestone at a time, smallest change first, no committing. Use when building one planned milestone; hands back to orchestrate for the commit gate.
+when_to_use: Executing one milestone from plan.md; the user asks to build or implement the next planned slice until it's green and demonstrable.
+---
+
 # Implement
 
 ## Purpose

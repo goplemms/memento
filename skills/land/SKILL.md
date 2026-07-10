@@ -1,3 +1,9 @@
+---
+name: land
+description: Close out a finished feature — merge the work, run the reflection ritual that captures workflow-asset improvements, graduate the durable record, and archive the workspace. Use when a feature's milestones are all done and it's time to merge, reflect, and clean up.
+when_to_use: A feature is finished (all milestones green and gates met) and needs merging, reflection, graduation, and archival; capturing kit improvements at the end of a feature.
+---
+
 # Land
 
 ## Purpose

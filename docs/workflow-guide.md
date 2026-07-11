@@ -15,7 +15,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Land** skill | `skills/land/SKILL.md` | Closing out a finished feature: merging, reflection, and capturing workflow improvements |
 | **Workflow Init** skill | `skills/workflow-init/SKILL.md` | Bootstrapping a repo to use the kit (creates `scratchpad/`, wires `.gitignore`, checks for shadows) |
 | **Workflow Sync** skill | `skills/workflow-sync/SKILL.md` | Detecting and reconciling drift between a repo's vendored skill copies and the canonical kit |
-| **Iterate on Asset** workflow | `workflows/iterate-on-asset/WORKFLOW.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
+| **Iterate on Asset** workflow | `skills/iterate-on-asset/SKILL.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
 
 ---
 

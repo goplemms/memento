@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # install.sh — make memento the single source of truth for the workflow kit.
 #
-#   --user (default)   SYMLINK skills/personas/templates into ~/.claude and put
+#   --user (default)   SYMLINK skills/agents/templates into ~/.claude and put
 #                      scripts on PATH (~/.local/bin). Edits to the live files
 #                      ARE edits to memento — commit here, no backport.
 #   --vendor <repo>    COPY version-pinned assets into <repo>, stamping a
@@ -16,7 +16,7 @@ KIT_ROOT="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")" && pwd)"
 CLAUDE_DIR="${CLAUDE_HOME:-$HOME/.claude}"
 BIN_DIR="${KIT_BIN_DIR:-$HOME/.local/bin}"
 BACKUP_ROOT="$CLAUDE_DIR/.memento-backups"
-LINKED_DIRS=(skills personas templates)
+LINKED_DIRS=(skills agents templates)
 
 MODE="user"
 VENDOR_REPO=""
@@ -106,7 +106,7 @@ install_user() {
   done
   scan_shadows
   echo ""
-  echo "done (--user). Edits to ~/.claude/{skills,personas,templates} ARE edits to memento."
+  echo "done (--user). Edits to ~/.claude/{skills,agents,templates} ARE edits to memento."
   echo "Ensure $BIN_DIR is on your PATH."
 }
 

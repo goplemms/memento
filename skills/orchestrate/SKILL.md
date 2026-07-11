@@ -76,7 +76,10 @@ A code change was just made: <SUMMARY of what changed and why>
 Search the docs (all .md files) and source docstrings/comments for any text that now
 conflicts with or is made stale by this change. For each stale passage, edit it in place to
 reflect current truth. Do NOT rewrite healthy docs — only fix passages that are factually
-wrong or misleading given the change. Do not touch the scratchpad workspace, migration
+wrong or misleading given the change. This includes **derived docs that render from
+code-fenced sources** — Mermaid diagrams, architecture diagrams, systems atlases, data-flow
+maps: check the diagram itself still matches reality, not just the prose around it (a stale
+diagram rarely reads as plainly-wrong text). Do not touch the scratchpad workspace, migration
 files, or test files.
 
 After editing, report a one-line summary of every file you changed and what you fixed.

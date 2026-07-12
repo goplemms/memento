@@ -1,6 +1,6 @@
 ---
 name: discussion-to-plan
-description: Turn a fuzzy feature idea from an earlier conversation into a clear goal and a single implementation plan document, without over-trusting the transcript or skipping alignment with the user. Produces the MVP contract that orchestrate builds against. Use when a prior discussion needs to become a concrete plan.
+description: Turn a fuzzy feature idea from an earlier conversation into a clear goal and a single implementation plan document, without over-trusting the transcript, skipping alignment with the user, or graduating a consequential decision that hasn't survived an adversarial red-team. Produces the MVP contract that orchestrate builds against. Use when a prior discussion needs to become a concrete plan.
 ---
 
 # Discussion to Plan
@@ -21,7 +21,8 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
 2. Pull out from prior discussion only what might support that hypothesis: goals, constraints, examples, and explicit non-goals. Quote or paraphrase briefly; do not paste huge blocks unless asked.
 3. Ask a small set of focused questions to resolve ambiguity. Prefer one round of tight questions over many vague ones. If the user says “good enough,” stop asking and move on.
 4. Confirm with the user which parts of the prior conversation are still relevant and which to ignore.
-5. Only after alignment, draft the plan. When this feeds the kit's workflow, write it into the workspace's `plan.md` (from `${CLAUDE_PLUGIN_ROOT}/templates/workflow/plan.md`): a north-star goal, non-scope, and ordered milestones — each milestone carrying an inline user-testable gate (web → page/button · CLI → command + output · lib → invokable runner). Otherwise a short freeform plan (problem, goal, scope, approach, risks, next steps) is fine. Keep it short unless the user asks for depth.
+5. **Red-team before you commit.** Before a substantive decision (or a small batch of them) graduates into the plan, stress-test it: fan out a few *independent* critics, each with a *distinct lens* (correctness/feasibility · incentives/trade-offs · architecture/scope · internal coherence · does-it-serve-the-goal), each told to *break* the decision and to ground every claim in the actual code and artifacts — not the decision's own framing. Keep only the objections that survive, then revise or confirm. Mark a decision **PROVISIONAL** until it clears this and **CLEARED** after. Batch decisions before a pass (it costs real tokens) and reserve it for calls that would be expensive to get wrong — skip it for reversible micro-choices.
+6. Only after alignment and review, draft the plan. When this feeds the kit's workflow, write it into the workspace's `plan.md` (from `${CLAUDE_PLUGIN_ROOT}/templates/workflow/plan.md`): a north-star goal, non-scope, and ordered milestones — each milestone carrying an inline user-testable gate (web → page/button · CLI → command + output · lib → invokable runner). Otherwise a short freeform plan (problem, goal, scope, approach, risks, next steps) is fine. Keep it short unless the user asks for depth.
 
 ## Outputs
 
@@ -32,5 +33,7 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
 ## Notes
 
 Default to interactive alignment first; the transcript informs the conversation, it does not replace it. If the prior discussion is missing or thin, say so and build the plan from live answers.
+
+An independent, artifact-grounded red-team (step 5) catches plausible-but-wrong decisions before they reach the plan, where they'd otherwise surface at build time — far more expensive to unwind. The independence and the grounding are what make it work: a single generic "review" pass tends to reproduce the author's blind spot, and ungrounded critique invents problems. Scale it to stakes — a couple of finders for a small call, several diverse lenses plus a synthesis for a large one.
 
 This skill produces the MVP contract that `memento:orchestrate` builds against. It does not duplicate the milestone-execution loop — once `plan.md` exists, hand off to `memento:orchestrate` / `memento:implement`.

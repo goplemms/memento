@@ -1,6 +1,7 @@
 ---
 name: implement
 description: Execute a single milestone from plan.md to the point where its tests are green and its user-testable gate can be demonstrated. Scoped to one milestone at a time; hands back to orchestrate for the commit gate. Use when building the active milestone of a kit-driven feature.
+when_to_use: Executing one milestone from plan.md; the user asks to build or implement the next planned slice until it's green and demonstrable.
 ---
 
 # Implement

@@ -1,6 +1,7 @@
 ---
 name: discussion-to-plan
 description: Turn a fuzzy feature idea from an earlier conversation into a clear goal and a single implementation plan document, without over-trusting the transcript, skipping alignment with the user, or graduating a consequential decision that hasn't survived an adversarial red-team. Produces the MVP contract that orchestrate builds against. Use when a prior discussion needs to become a concrete plan.
+when_to_use: A prior discussion or transcript needs to become a concrete plan document; the user asks to turn an idea into a plan or MVP contract before building.
 ---
 
 # Discussion to Plan

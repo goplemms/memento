@@ -1,6 +1,7 @@
 ---
 name: repo-exploration
 description: Quickly understand an unfamiliar repository before proposing changes — restate the goal, inspect only the files needed, summarize the codebase shape, and name the smallest useful next action. Conservative by design to reduce thrash. Use when starting work in an unfamiliar repo or before proposing a change.
+when_to_use: Starting a task in an unfamiliar repo; before proposing or planning a change; when you need the lay of the land without reading everything.
 ---
 
 # Repo Exploration

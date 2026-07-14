@@ -27,3 +27,5 @@ This mirrors the phone-home rule for skills — same trust boundary, same gate.
 
 - [0001](0001-adopt-public-plugin-distribution.md) — Adopt public plugin
   distribution for the kit. *(Accepted)*
+- [0002](0002-red-team-decisions-before-they-graduate.md) — Red-team decisions
+  before they graduate. *(Proposed)*

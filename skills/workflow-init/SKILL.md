@@ -1,6 +1,7 @@
 ---
 name: workflow-init
 description: Bootstrap a repo to use the kit's planning workflow — wire .claude/settings.json so cloud sessions auto-install the memento plugin, create the scratchpad/ workspace, wire .gitignore so feature work stays local but templates can be tracked, and surface any project-scope skills that would shadow the kit. Use once per repo before running the orchestrate loop.
+when_to_use: Setting up a new repo for the memento workflow; scratchpad/ or .gitignore isn't wired yet; before the first new-feature.sh in a repo.
 ---
 
 # Workflow Init

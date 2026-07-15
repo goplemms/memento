@@ -16,6 +16,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Workflow Init** skill | `skills/workflow-init/SKILL.md` | Bootstrapping a repo to use the kit (creates `scratchpad/`, wires `.gitignore`, checks for shadows) |
 | **Workflow Sync** skill | `skills/workflow-sync/SKILL.md` | Detecting and reconciling drift between a repo's vendored skill copies and the canonical kit |
 | **Iterate on Asset** workflow | `skills/iterate-on-asset/SKILL.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
+| **Challenge** skill | `skills/challenge/SKILL.md` | About to commit to a plan, ship an implementation, or accept a theory — pressure-test it by trying to break it, especially when it looks right |
 
 ---
 

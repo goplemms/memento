@@ -36,7 +36,13 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `PROGRESS.md` current: status table, current block (milestone, last-green
    sha, next step, blockers).
 5. **Commit gate.** A milestone is "in progress" until BOTH its tests are green
-   AND its user-testable gate is met by the user. Only then commit. Never
+   AND its user-testable gate is met by the user. Before committing a milestone
+   that changed real behavior, run `memento:challenge` on the implementation **as
+   a default step, not just on demand** — try to break it (missed cases, other
+   code paths, namespace/edge assumptions the green tests never exercised) and
+   trust it only when you can't; fold what survives back in *before* the gate.
+   Trivial or purely mechanical changes (docs, config, a rename with green tests)
+   may skip it — say so rather than skipping silently. Only then commit. Never
    auto-commit; stage by name and pause for approval. After a commit that makes a
    *major* change (public API, storage layout, data model, config surface, or a
    workflow/convention the docs describe), fire a background doc-refresh agent so
@@ -93,6 +99,12 @@ After editing, report a one-line summary of every file you changed and what you 
 - A graduated durable record, an archived workspace, and a swept archive
 
 ## Notes
+
+**Plan then challenge is the spine of the loop.** Converge on the contract, then
+before each real commit try to break what you built — an implementation that was
+only ever walked forward tends to ship incomplete (the case it doesn't handle is
+exactly the one you didn't think to try). The commit gate's default challenge
+step is where that happens; treat it as part of "done," not an optional extra.
 
 Mid-stream pivots and adjustments are normal — name them explicitly so the
 record stays honest. The whole loop is markdown + three structure scripts; if

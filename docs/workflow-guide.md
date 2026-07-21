@@ -16,7 +16,8 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Workflow Init** skill | `skills/workflow-init/SKILL.md` | Bootstrapping a repo to use the kit (creates `scratchpad/`, wires `.gitignore`, checks for shadows) |
 | **Workflow Sync** skill | `skills/workflow-sync/SKILL.md` | Detecting and reconciling drift between a repo's vendored skill copies and the canonical kit |
 | **Iterate on Asset** workflow | `skills/iterate-on-asset/SKILL.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
-| **Challenge** skill | `skills/challenge/SKILL.md` | About to commit to a plan, ship an implementation, or accept a theory — pressure-test it by trying to break it, especially when it looks right |
+| **Challenge** skill | `skills/challenge/SKILL.md` | The default pre-commit gate in the loop — before committing a milestone that changed real behavior, try to break it; also fire on demand before accepting any plan or theory |
+| **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
 
 ---
 
@@ -35,8 +36,15 @@ A step-by-step reference for which skills and workflows to fire, and when.
 2. **Orchestrate** — runs the full loop internally:
    - Calls **Discussion to Plan** to write `plan.md` with milestones and user-testable gates
    - Calls **Implement** once per milestone until tests are green and the gate is met
+   - Runs **Challenge** as the default commit gate — breaks each behavior-changing milestone before it's committed
    - Calls **Land** at the end for merge, reflection, and any kit improvements
 3. `archive-feature.sh <name>` then `sweep-archive.sh` — clean up the scratchpad
+
+### Auditing a class of problem across the codebase
+1. **Repo Exploration** — only if you need the lay of the land first
+2. **Codebase Audit** — dispatch a read-only agent per lens; get impact-ranked findings + a systemic root fix, each fix paired with the tripwire that keeps it fixed
+3. **Challenge** — pressure-test the audit's fix-list *before the first edit* (the cheapest place to catch a confidently-wrong fix)
+4. **Orchestrate** — drive the confirmed fixes as a feature, correctness + tripwires first (each milestone still challenged before commit); file the rest as follow-ups
 
 ### Setting up a repo for the first time
 1. `./install.sh --user` (once, on the machine) — symlink kit assets into `~/.claude`
@@ -73,6 +81,9 @@ Suspected drift between repo copy and canonical kit?
 
 Improving an existing skill/persona/eval?
   └─ Yes → Iterate on Asset workflow
+
+A class of problem seems to span the codebase (or about to refactor)?
+  └─ Yes → Codebase Audit (read-only) → Orchestrate the root fix
 ```
 
 ---

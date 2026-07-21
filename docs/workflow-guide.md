@@ -42,8 +42,9 @@ A step-by-step reference for which skills and workflows to fire, and when.
 
 ### Auditing a class of problem across the codebase
 1. **Repo Exploration** — only if you need the lay of the land first
-2. **Codebase Audit** — dispatch a read-only agent for one lens; get severity-ranked findings + a systemic root fix
-3. **Orchestrate** — drive the confirmed root fix as a feature (each milestone challenged before commit); file the rest as follow-ups
+2. **Codebase Audit** — dispatch a read-only agent per lens; get impact-ranked findings + a systemic root fix, each fix paired with the tripwire that keeps it fixed
+3. **Challenge** — pressure-test the audit's fix-list *before the first edit* (the cheapest place to catch a confidently-wrong fix)
+4. **Orchestrate** — drive the confirmed fixes as a feature, correctness + tripwires first (each milestone still challenged before commit); file the rest as follow-ups
 
 ### Setting up a repo for the first time
 1. `./install.sh --user` (once, on the machine) — symlink kit assets into `~/.claude`

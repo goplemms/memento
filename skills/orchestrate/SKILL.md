@@ -105,6 +105,11 @@ before each real commit try to break what you built — an implementation that w
 only ever walked forward tends to ship incomplete (the case it doesn't handle is
 exactly the one you didn't think to try). The commit gate's default challenge
 step is where that happens; treat it as part of "done," not an optional extra.
+And when a milestone's plan was *derived* rather than discussed — an audit's
+fix-list, a migration inventory — challenge the **plan itself before the first
+edit** too: a pre-mortem there is strictly cheaper than one at the commit gate,
+and it is where a confidently-wrong fix (one that would break a deliberate
+behavior the derivation missed) gets caught with zero code written.
 
 Mid-stream pivots and adjustments are normal — name them explicitly so the
 record stays honest. The whole loop is markdown + three structure scripts; if

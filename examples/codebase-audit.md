@@ -58,3 +58,11 @@ recommendation and the invariants that constrain it.
   orphan-cleanup fix covered only two of *four* deletion paths, and that the trash-hiding
   fix missed the UUID-keyed download case. The audit finds the class; challenge proves the
   fix covers all of it.
+- A second run (a tactics-game repo, convention/terminology-drift lens, six scoped
+  agents in parallel) confirmed the shape and sharpened three steps: challenging the
+  fix-list *before building* reversed one fix outright (a throw-on-duplicate that would
+  have broken a deliberate double-load idempotency) and rejected a proposed synthetic
+  "model file" as a drift surface; baselining against the repo's prior refactor canon
+  showed drift lived exactly where no guard reached — so every systemic fix shipped
+  with a named tripwire; and one subagent finding reproduced while another didn't,
+  which is why "verify before trusting" is a step, not a nicety.

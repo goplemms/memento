@@ -22,7 +22,12 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 ## Process
 
 1. **Final review.** Confirm every milestone is green and its user-testable gate
-   was met. Stage by name and commit/merge per the repo's convention.
+   was met. Stage by name and commit/merge per the repo's convention. **When the
+   merge opens a PR, lead the description with a tweet-length (≤280 char),
+   plain-language summary of what the change *gets* the reader and whose work it
+   eases — altitude above the file list, no jargon.** Add ~10-word bullets only
+   where they earn it; push the technical detail below the fold. See
+   `examples/land.md`.
 2. **Reflect.** Ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier

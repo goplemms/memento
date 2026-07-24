@@ -27,6 +27,7 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
    - **Round 2 — only if round 1 bit.** If surviving objections remain, *revise the decision to address them*, then run a **fresh** independent fan-out against the **revised** decision. This is the "back and forth," done as attack → revise → re-attack — **not** a debate between critics, and never over a shared critic transcript. Independence is the load-bearing property: a two-party dialogue converges toward a negotiated consensus (a plausible-but-wrong settlement), which is the blind spot the gate exists to catch. The push-back is *your revision*, attacked afresh.
    - **Stop / cap.** If round 1 comes back clean, stop there — do not manufacture a second round. Hard cap: two rounds. Mark a decision **PROVISIONAL** until a round leaves no surviving objection (or you consciously accept the residual and say so), and **CLEARED** after.
    - Batch decisions before a pass (each round costs real tokens) and reserve the whole gate for calls that would be expensive to get wrong — skip it for reversible micro-choices.
+   - **Close with a TLDR readout.** Once the loop settles, recap what the red-team surfaced for a fast scan: bullets of **≤10 words each**, and under each bullet a one-line grounding — a `file:line`, *or* a named condition when the finding is a gap or a cross-artifact relation with no single line — naming the mechanism in a clause. A bare locator is not the grounding; the *why* is, so never let the line number stand in for it. Frame it as a readout of the surviving objections and how each was resolved (folded in / residual accepted), **not** a go/no-go verdict — the decision stays the user's.
 6. Only after alignment and review, draft the plan. When this feeds the kit's workflow, write it into the workspace's `plan.md` (from `${CLAUDE_PLUGIN_ROOT}/templates/workflow/plan.md`): a north-star goal, non-scope, and ordered milestones — each milestone carrying an inline user-testable gate (web → page/button · CLI → command + output · lib → invokable runner). Otherwise a short freeform plan (problem, goal, scope, approach, risks, next steps) is fine. Keep it short unless the user asks for depth.
 
 ## Outputs
@@ -34,6 +35,7 @@ Turn a fuzzy feature idea that emerged from earlier conversation into a clear go
 - A short synthesis: inferred feature, what from prior discussion matters, and what was discarded or left open
 - The clarifying Q&A (or a note that the user skipped clarification)
 - A plan document the team can execute against — `plan.md` when driving the kit's `orchestrate` loop, otherwise stored/pasted where the user wants it
+- A closing TLDR readout of the red-team: ≤10-word bullets recapping the surviving objections and their resolution, each grounded (a `file:line` or a named condition) — a readout, not a verdict
 
 ## Notes
 

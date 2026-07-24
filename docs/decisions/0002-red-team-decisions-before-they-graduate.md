@@ -1,7 +1,7 @@
 # ADR-0002: Red-team decisions before they graduate
 
-- **Status:** Proposed
-- **Date:** 2026-07-12
+- **Status:** Accepted
+- **Date:** 2026-07-12 (proposed) · 2026-07-24 (accepted, extended to multi-turn)
 
 ## Context
 
@@ -25,6 +25,13 @@ grounding every claim in the real code/artifacts — keep the objections that
 survive, and revise or confirm. A decision is **PROVISIONAL** until it clears
 the gate and **CLEARED** after.
 
+The gate runs **up to two rounds as revise-and-re-attack**: round 1 fans out
+independent critics; if surviving objections remain, the author *revises* the
+decision and a *fresh* independent fan-out attacks the revised version. Round 2
+fires only when round 1 bit; a clean round 1 stops at one; hard cap of two. The
+push-back is the author's revision, never a defender agent debating the critics —
+see the rejected alternative below.
+
 ## Alternatives considered
 
 - **A single self-review pass.** Cheapest, but tends to reproduce the author's
@@ -34,6 +41,13 @@ the gate and **CLEARED** after.
 - **Red-team every decision, always.** Too costly; batching plus a
   "substantive, expensive-to-get-wrong only" guardrail keeps it worth its token
   cost.
+- **Adversary↔defender debate over a shared transcript.** Rejected: a defender
+  whose job is to rebut objections rationalizes real ones away, and a two-party
+  dialogue over a shared transcript converges the voices toward consensus — the
+  opposite of the independence the gate depends on. The second round is the
+  author's revision re-attacked by fresh independent critics instead. (A defender
+  survives only as an opt-in, off-by-default contrarian pass surfaced *alongside*
+  the objections, for A/B-testing capitulation bias — never as the default.)
 
 ## Consequences
 
@@ -45,3 +59,6 @@ the gate and **CLEARED** after.
   — a generic, ungrounded "review" degrades it.
 - **Revisit when:** the token cost outweighs the catch rate on smaller efforts,
   or a lighter heuristic proves as reliable.
+- **Multi-turn owed:** the round loop can spend up to 2× the critics of a single
+  pass. The auto-round-2-only-when-round-1-bit rule and the hard cap keep that
+  bounded; if round 2 stops earning its catch rate, drop back to a single pass.

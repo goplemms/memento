@@ -8,13 +8,19 @@
 
 Drive a design-heavy planning session that settles a sequence of consequential
 decisions, and run the adversarial-review gate on each (or on a small batch)
-before it graduates into the plan.
+before it graduates into the plan. The gate runs up to two rounds
+(revise-and-re-attack): plant a decision with a real flaw and confirm round 1
+surfaces it, the decision is revised, and a *fresh* round-2 fan-out attacks the
+revised version; then run a clean decision and confirm it stops at round 1.
 
 ## Success Signals
 
 - surfaces concept-level failures the decision's own statement hides, grounded
   in the real code/artifacts
 - independent, distinct-lens critics catch what a single review pass misses
+- **round 2 attacks the *revised* decision** (attack → revise → re-attack), fires
+  only when round 1 bit, and a clean decision stops at round 1 (no manufactured
+  second round)
 - decisions carry a PROVISIONAL → CLEARED trail; weak ones get revised, not shipped
 
 ## Result

@@ -19,7 +19,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Challenge** skill | `skills/challenge/SKILL.md` | The default pre-commit gate in the loop — before committing a milestone that changed real behavior, try to break it; also fire on demand before accepting any plan or theory |
 | **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
 | **Decompose to Issues** skill | `skills/decompose-to-issues/SKILL.md` | A plan needs to become a tracker backlog several sessions can work in parallel, or you've inherited a backlog written before the code existed and need to know which of its claims still hold |
-| **Backlog Reviewer** persona | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
+| **Backlog Reviewer** agent | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
 
 ---
 
@@ -51,7 +51,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 ### Turning a plan into a backlog several sessions can work
 1. **Repo Exploration** — only if the repo is unfamiliar; the code is the source of truth for every claim an issue will make
 2. **Decompose to Issues** — cut along real code seams, map the file collisions, label the phase boundary, split closeable slices into linked child issues
-3. *(inside step 2)* **Backlog Reviewer** persona — the read-only gate over the whole set: contradicted premises, phantom dependencies, duplicate ownership, unverifiable criteria, collisions, gaps
+3. *(inside step 2)* **Backlog Reviewer** agent — the read-only gate over the whole set: contradicted premises, phantom dependencies, duplicate ownership, unverifiable criteria, collisions, gaps
 4. **Orchestrate** — drive the first issue as a feature; the rest of the backlog is now sequenced and safe to parallelise
 
 ### Inheriting a backlog written before the code existed

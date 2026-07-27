@@ -18,6 +18,8 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Iterate on Asset** workflow | `skills/iterate-on-asset/SKILL.md` | Improving an existing skill, persona, eval, or example through a draft-try-revise loop |
 | **Challenge** skill | `skills/challenge/SKILL.md` | The default pre-commit gate in the loop — before committing a milestone that changed real behavior, try to break it; also fire on demand before accepting any plan or theory |
 | **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
+| **Decompose to Issues** skill | `skills/decompose-to-issues/SKILL.md` | A plan needs to become a tracker backlog several sessions can work in parallel, or you've inherited a backlog written before the code existed and need to know which of its claims still hold |
+| **Backlog Reviewer** agent | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
 
 ---
 
@@ -45,6 +47,16 @@ A step-by-step reference for which skills and workflows to fire, and when.
 2. **Codebase Audit** — dispatch a read-only agent per lens; get impact-ranked findings + a systemic root fix, each fix paired with the tripwire that keeps it fixed
 3. **Challenge** — pressure-test the audit's fix-list *before the first edit* (the cheapest place to catch a confidently-wrong fix)
 4. **Orchestrate** — drive the confirmed fixes as a feature, correctness + tripwires first (each milestone still challenged before commit); file the rest as follow-ups
+
+### Turning a plan into a backlog several sessions can work
+1. **Repo Exploration** — only if the repo is unfamiliar; the code is the source of truth for every claim an issue will make
+2. **Decompose to Issues** — cut along real code seams, map the file collisions, label the phase boundary, split closeable slices into linked child issues
+3. *(inside step 2)* **Backlog Reviewer** agent — the read-only gate over the whole set: contradicted premises, phantom dependencies, duplicate ownership, unverifiable criteria, collisions, gaps
+4. **Orchestrate** — drive the first issue as a feature; the rest of the backlog is now sequenced and safe to parallelise
+
+### Inheriting a backlog written before the code existed
+1. **Decompose to Issues** — start at step 1: verify the shared premise every issue assumes before reviewing any single one
+2. Fix the issue bodies in place, leaving a changelog comment per issue; escalate decisions rather than picking silently
 
 ### Setting up a repo for the first time
 1. `./install.sh --user` (once, on the machine) — symlink kit assets into `~/.claude`
@@ -84,6 +96,12 @@ Improving an existing skill/persona/eval?
 
 A class of problem seems to span the codebase (or about to refactor)?
   └─ Yes → Codebase Audit (read-only) → Orchestrate the root fix
+
+Plan needs to become issues several sessions can work in parallel?
+  └─ Yes → Decompose to Issues (includes the Backlog Reviewer gate)
+
+Inherited a backlog written before the code existed?
+  └─ Yes → Decompose to Issues — verify the shared premise first, then review
 ```
 
 ---

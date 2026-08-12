@@ -46,6 +46,23 @@ the decisions. Guard against it:
   are valuable and exactly where they stop being noise.
 - **Prefer short.** A few sentences and a clear question beats a complete report.
 - **End with the decision you need**, phrased so it can be answered in a sentence.
+- **Open any decision point with a TL;DR block.** A rule, a blockquote headed
+  **TL;DR**, and a rule — ≤5 bullets, ≤10 words each, plain language, last bullet
+  the call you need. Everything else goes below it; nothing is omitted, only
+  moved. Fire it whenever the human is being asked to choose, not on every
+  message — it stays scannable only while it stays rare. Full convention in
+  `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`.
+
+  ```text
+  ---
+
+  > **TL;DR**
+  > - Players can pick who enters each door.
+  > - Both endings reachable; one still unwinnable.
+  > - Your call: fix now or ship?
+
+  ---
+  ```
 
 Translating is most of the job:
 

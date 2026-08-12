@@ -31,6 +31,9 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
 6. Update `PROGRESS.md`: move the milestone `in-progress` → `testable`, record
    the last-green sha and the next step.
 7. Hand back to `memento:orchestrate` for the commit gate. Do not commit here.
+   Open the hand-off with a TL;DR block — ≤5 bullets, ≤10 words each, no jargon,
+   paths, or symbol names: what the milestone now does, what it cost, and what
+   the user should try. See `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`.
 
 ## Outputs
 

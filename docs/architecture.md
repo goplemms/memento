@@ -81,6 +81,31 @@ channels (skills, agents, commands, hooks, MCP servers) — there is no
 and workflows are authored as skills. This is the cloud-first channel — it installs in
 ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
 
+The plugin also ships hooks (`hooks/hooks.json` → `hooks/tldr-context.sh`) that
+inject the TL;DR convention. This is the one behavior the kit needs *outside* a
+skill invocation: a decision point can arrive at any moment, including in a
+session where no kit skill ever fired, so a skill-scoped instruction would never
+be loaded to see it.
+
+The shape is floor-plus-refresh. `SessionStart` (`startup|resume|clear|compact`)
+always injects, so every session has it once and compaction re-arms it as the old
+copy is dropped. `UserPromptSubmit` injects for ~19% of turns, keeping it near
+the decision points that arrive deep in a long session. The sampling is stateless
+— it keys off the last hex digit of the per-prompt `prompt_id` UUID, so there is
+no counter file to GC and no parsing of Claude Code's internal transcript format.
+
+Sampling is load-bearing, not tidiness: injected context is retained per turn
+rather than replaced, so an unsampled per-turn hook costs ~235 tokens every turn
+and accumulates to ~23,500 by turn 100 — worst in the long sessions it is meant
+to help, and it accelerates the compaction it was trying to survive. The floor
+plus 19% sampling lands near 4,600 over the same span.
+
+The hook extracts its text from the marked range in `docs/tldr-convention.md`
+rather than holding a copy, and exits 0 emitting nothing if anything is missing —
+it can never fail a turn. Note this rides the plugin channel only: a `--user`
+symlink install links `skills/`, `agents/`, and `templates/`, not hooks, so the
+symlink path does not get it.
+
 ### Identity guarantee and the shadow landmine
 
 On a single dev machine, `--user` symlinks make the workflow byte-identical

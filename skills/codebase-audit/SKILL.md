@@ -67,13 +67,18 @@ hit. The deliverable is a triage-ready report, not edits.
    deliberate idempotency, a missing real-scene guard, a proposed artifact that
    is itself a drift surface.
 7. **Triage with the user.** Fix now / file as follow-up / won't-fix is their
-   call. Feed the confirmed root fix into `memento:orchestrate` (or a single
+   call — so lead the report with a TL;DR block (≤5 bullets, ≤10 words each, no
+   jargon, paths, or symbol names: what the lens found, what it costs, what you
+   need decided), with the ranked findings below it. See
+   `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`. Feed the confirmed root fix into `memento:orchestrate` (or a single
    change); record the rest as follow-ups so they survive the session. When the
    work splits into waves, sequence **correctness + tripwires first** — every
    later wave then runs under the protection the first wave built.
 
 ## Outputs
 
+- A TL;DR block leading the report: ≤5 jargon-free bullets, ≤10 words each,
+  ending on the triage call needed from the user.
 - An impact-ranked findings report, each with file:line, the wrong assumption,
   the user-visible symptom, and a fix direction.
 - A systemic "one root fix" recommendation with the invariants that constrain it

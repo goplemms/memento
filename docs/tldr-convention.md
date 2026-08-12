@@ -1,0 +1,142 @@
+# The TL;DR Convention
+
+## Why
+
+Decision points bury the decision. A red-team readout, an audit's findings, a
+commit gate, a backlog review — each arrives as a wall of correct, dense text,
+and the one thing the reader actually has to do (choose) is somewhere inside it.
+The volume is not the problem; the *ordering* is. This convention puts a fixed,
+visually distinct, jargon-free summary where the reader hits it first.
+
+One convention, two surfaces: an in-session **TL;DR block**, and the
+PR-description lead in `memento:land`.
+
+## The injected rule
+
+Everything between the markers below is what the plugin's hooks inject into
+every session, in every repo, whether or not a kit skill is running
+(`hooks/tldr-context.sh` extracts this range verbatim). It is the operative
+short form; the rest of this file is the reasoning behind it. Edit it here —
+there is no second copy.
+
+Injected twice over, on a floor-plus-refresh shape:
+
+- **`SessionStart`** (`startup|resume|clear|compact`) always injects. Every
+  session gets the convention at least once, and compaction re-arms it at the
+  moment the previous copy is discarded.
+- **`UserPromptSubmit`** injects for ~19% of turns, which pulls it back down
+  next to the decision points that arrive deep in a long session, where the
+  session-start copy has scrolled far up-context.
+
+The sampling is stateless: `prompt_id` is a per-prompt UUID, so the hook keys
+off its last hex digit (`0|1|2` of 16) — no counter file to clean up and no
+transcript parsing against an undocumented format. It deliberately does not key
+off wall-clock time, which would track how fast you type rather than how far
+into a session you are, and could miss a short session entirely.
+
+Sampling is not cosmetic. Injected context is retained per turn rather than
+replaced, so an unsampled per-turn hook costs ~235 tokens on *every* turn and
+accumulates — about 23,500 tokens by turn 100, spent hardest on exactly the long
+sessions the convention exists to serve. Floor + 19% sampling costs ~235 per
+session plus ~46/turn amortized, roughly 4,600 tokens over the same 100 turns.
+
+<!-- inject:start -->
+**TL;DR convention.** When a reply hands the user something to DECIDE — a commit
+gate, a red-team readout, an audit's findings, a plan hand-off, a backlog review,
+or any other fork where they must choose — open it with this block:
+
+---
+
+> **TL;DR**
+> - plain-language bullet, 10 words or less
+> - what it costs them, 10 words or less
+> - the call you need, 10 words or less
+
+---
+
+At most 5 bullets. No jargon, file paths, or symbol names — those belong below
+the block, where the full detail still lives. Nothing is omitted, only moved.
+Put the block at the TOP when a decision is pending, at the BOTTOM when it
+recaps work just finished. Do NOT use it on ordinary replies: it works by being
+rare, and on every message it is just formatting.
+<!-- inject:end -->
+
+## The block
+
+Always the same shape, so it can be recognized without being read — a rule, a
+blockquote, a rule:
+
+```text
+---
+
+> **TL;DR**
+> - Cache keeps stale entries after a delete.
+> - Fix is one file, no migration.
+> - Your call: ship now or batch it?
+
+---
+```
+
+## Rules
+
+- **≤10 words a bullet, ≤5 bullets.** If it does not fit, the summary is doing
+  the detail's job. (The red-team readout is exempt from the count — see below.)
+- **No jargon, no file paths, no symbol names.** Those live below the fold. The
+  detail is never omitted — only moved.
+- **Nothing new.** Every bullet restates something the detail says. The TL;DR is
+  a lens on the message, not a second source of truth.
+- **Say what it costs and what you need.** A summary that only reports what
+  happened does not help anyone decide. End on the ask when there is one.
+- **Top when a decision is pending; bottom when it is a readout** of work just
+  finished. The first is read-then-expand, the second is a recap.
+
+## When it fires
+
+At the named decision points:
+
+| Skill | Moment |
+|---|---|
+| `discussion-to-plan` | the red-team readout, and the plan hand-off |
+| `orchestrate` | the commit gate, before asking for approval |
+| `implement` | handing a milestone back at its user-testable gate |
+| `challenge` | what broke and what survived |
+| `codebase-audit` | the findings report, ahead of triage |
+| `decompose-to-issues` | the review-gate report |
+| `land` | the PR description (the prose surface, below) |
+
+...and **any time the user is being asked to choose** — a fork mid-flow counts
+even when it is not a formal gate.
+
+Do not fire it on ordinary short answers. The block earns its distinctiveness by
+being rare; on every message it is just formatting.
+
+## The one exception: the red-team readout
+
+`discussion-to-plan`'s red-team readout departs from the rules above in two ways,
+and only it does:
+
+- **It keeps a grounding line** under each bullet — a `file:line` *or* a named
+  condition, naming the mechanism in a clause. That readout is a verification
+  record, and the grounding is its substance: an ungrounded objection is exactly
+  what the gate exists to catch. Everywhere else, bullets stay bare.
+- **It is not capped at 5 bullets.** Every surviving objection gets a line. The
+  cap exists to stop a summary sprawling into the detail it sits above — but
+  here the bullets *are* the findings, and dropping one to fit defeats the gate.
+  A long readout is a signal about the decision, not a formatting problem.
+
+The distinction generalizes: cap the block when the full detail sits directly
+below it, and never when the block is the only place a finding appears.
+
+## The PR surface
+
+`memento:land` step 1 applies the same convention where the surface is prose
+rather than a chat block: a ≤280-char plain-language lead saying what the change
+gets the reader and whose work it eases, ~10-word bullets only where they earn
+it, and the technical detail below its own heading. Worked before/after in
+`examples/land.md`.
+
+## The test
+
+Could someone who has not read the detail say what is being decided and what it
+costs them? If the bullets only parse for someone who already read below the
+fold, they are at file-list altitude — raise them.

@@ -30,11 +30,12 @@ A step-by-step reference for which skills and workflows to fire, and when.
 |---|---|---|
 | **TL;DR block** | `docs/tldr-convention.md` | Any decision point hands the user something to choose — the commit gate, a red-team readout, an audit's findings, a plan hand-off, a backlog review, or any mid-flow fork. Lead with ≤5 jargon-free bullets of ≤10 words, detail below |
 
-Unlike everything above, the TL;DR block is not skill-scoped: the plugin's
-`UserPromptSubmit` hook (`hooks/hooks.json`) injects it every turn, so it
-applies in sessions where no kit skill was ever invoked. The named skills still
-reference it at their own decision points, which is what tells them *where* in
-their output it goes.
+Unlike everything above, the TL;DR block is not skill-scoped: the plugin's hooks
+(`hooks/hooks.json`) inject it once per session — and again after compaction —
+plus on ~19% of turns to keep it near the decision points that arrive late in a
+long session. So it applies even where no kit skill was ever invoked. The named
+skills still reference it at their own decision points, which is what tells them
+*where* in their output it goes.
 
 ---
 

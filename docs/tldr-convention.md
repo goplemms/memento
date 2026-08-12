@@ -13,11 +13,32 @@ PR-description lead in `memento:land`.
 
 ## The injected rule
 
-Everything between the markers below is what the plugin's `UserPromptSubmit`
-hook injects into every session, in every repo, whether or not a kit skill is
-running (`hooks/tldr-context.sh` extracts this range verbatim). It is the
-operative short form; the rest of this file is the reasoning behind it. Edit it
-here — there is no second copy.
+Everything between the markers below is what the plugin's hooks inject into
+every session, in every repo, whether or not a kit skill is running
+(`hooks/tldr-context.sh` extracts this range verbatim). It is the operative
+short form; the rest of this file is the reasoning behind it. Edit it here —
+there is no second copy.
+
+Injected twice over, on a floor-plus-refresh shape:
+
+- **`SessionStart`** (`startup|resume|clear|compact`) always injects. Every
+  session gets the convention at least once, and compaction re-arms it at the
+  moment the previous copy is discarded.
+- **`UserPromptSubmit`** injects for ~19% of turns, which pulls it back down
+  next to the decision points that arrive deep in a long session, where the
+  session-start copy has scrolled far up-context.
+
+The sampling is stateless: `prompt_id` is a per-prompt UUID, so the hook keys
+off its last hex digit (`0|1|2` of 16) — no counter file to clean up and no
+transcript parsing against an undocumented format. It deliberately does not key
+off wall-clock time, which would track how fast you type rather than how far
+into a session you are, and could miss a short session entirely.
+
+Sampling is not cosmetic. Injected context is retained per turn rather than
+replaced, so an unsampled per-turn hook costs ~235 tokens on *every* turn and
+accumulates — about 23,500 tokens by turn 100, spent hardest on exactly the long
+sessions the convention exists to serve. Floor + 19% sampling costs ~235 per
+session plus ~46/turn amortized, roughly 4,600 tokens over the same 100 turns.
 
 <!-- inject:start -->
 **TL;DR convention.** When a reply hands the user something to DECIDE — a commit

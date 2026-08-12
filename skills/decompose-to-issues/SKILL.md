@@ -109,7 +109,10 @@ rework two sessions later.
 - A file collision map and a stated order for contended files.
 - A dependency-ordered sequence naming what can start now, what is genuinely
   blocked, and what merely looks blocked.
-- A review report with each finding resolved, corrected, or escalated.
+- A review report with each finding resolved, corrected, or escalated, led by a
+  TL;DR block — ≤5 bullets, ≤10 words each, no jargon, paths, or symbol names:
+  what the gate caught, what it changed, what needs the human's call. See
+  `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`.
 
 ## Notes
 

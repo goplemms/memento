@@ -38,6 +38,8 @@ hasn't earned commitment. Try to break it; trust it only when you can't.
 
 ## Outputs
 
+- a closing TL;DR block — ≤5 bullets, ≤10 words each, no jargon or paths: what
+  broke, what survived, what it now needs (`${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`)
 - the ways it could fail, *tested* — which broke it, which it survived
 - the load-bearing assumptions, flagged verified vs unverified
 - the revised plan / implementation / theory, re-challenged

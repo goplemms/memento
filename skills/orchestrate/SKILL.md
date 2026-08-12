@@ -43,7 +43,9 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    trust it only when you can't; fold what survives back in *before* the gate.
    Trivial or purely mechanical changes (docs, config, a rename with green tests)
    may skip it — say so rather than skipping silently. Only then commit. Never
-   auto-commit; stage by name and pause for approval. After a commit that makes a
+   auto-commit; stage by name and pause for approval — and **lead that pause with
+   a TL;DR block** (see "Decision-point summaries" below) so the user can decide
+   without reading the whole gate. After a commit that makes a
    *major* change (public API, storage layout, data model, config surface, or a
    workflow/convention the docs describe), fire a background doc-refresh agent so
    stale docs don't accrete — see "Doc refresh" below. Don't block the commit on it.
@@ -58,6 +60,19 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    (graduation routing below; agent proposes, user confirms), fill `PROGRESS.md`
    Closeout, run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`, then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.
+
+## Decision-point summaries
+
+Every moment this loop hands the user something to decide, open with the TL;DR
+block from `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`: a rule, a
+blockquote headed **TL;DR**, and a rule — ≤5 bullets, ≤10 words each, no jargon,
+file paths, or symbol names, ending on the call you need. The detail is never
+omitted; it moves below the block.
+
+That means the commit gate, a pivot/adjustment classification, graduation
+routing, and **any other point where the user is asked to choose** — a fork
+mid-flow counts even when it is not a formal gate. It does not mean every
+message: the block only stays scannable while it stays rare.
 
 ## Graduation routing (judgment — propose, user confirms)
 

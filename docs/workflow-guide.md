@@ -24,6 +24,14 @@ A step-by-step reference for which skills and workflows to fire, and when.
 
 ---
 
+## Cross-Cutting Conventions
+
+| Convention | File | Applies when… |
+|---|---|---|
+| **TL;DR block** | `docs/tldr-convention.md` | Any decision point hands the user something to choose — the commit gate, a red-team readout, an audit's findings, a plan hand-off, a backlog review, or any mid-flow fork. Lead with ≤5 jargon-free bullets of ≤10 words, detail below |
+
+---
+
 ## Typical Sequences
 
 ### Starting fresh in an unfamiliar repo

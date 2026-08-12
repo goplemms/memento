@@ -11,6 +11,35 @@ visually distinct, jargon-free summary where the reader hits it first.
 One convention, two surfaces: an in-session **TL;DR block**, and the
 PR-description lead in `memento:land`.
 
+## The injected rule
+
+Everything between the markers below is what the plugin's `UserPromptSubmit`
+hook injects into every session, in every repo, whether or not a kit skill is
+running (`hooks/tldr-context.sh` extracts this range verbatim). It is the
+operative short form; the rest of this file is the reasoning behind it. Edit it
+here — there is no second copy.
+
+<!-- inject:start -->
+**TL;DR convention.** When a reply hands the user something to DECIDE — a commit
+gate, a red-team readout, an audit's findings, a plan hand-off, a backlog review,
+or any other fork where they must choose — open it with this block:
+
+---
+
+> **TL;DR**
+> - plain-language bullet, 10 words or less
+> - what it costs them, 10 words or less
+> - the call you need, 10 words or less
+
+---
+
+At most 5 bullets. No jargon, file paths, or symbol names — those belong below
+the block, where the full detail still lives. Nothing is omitted, only moved.
+Put the block at the TOP when a decision is pending, at the BOTTOM when it
+recaps work just finished. Do NOT use it on ordinary replies: it works by being
+rare, and on every message it is just formatting.
+<!-- inject:end -->
+
 ## The block
 
 Always the same shape, so it can be recognized without being read — a rule, a

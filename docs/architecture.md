@@ -81,6 +81,17 @@ channels (skills, agents, commands, hooks, MCP servers) — there is no
 and workflows are authored as skills. This is the cloud-first channel — it installs in
 ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
 
+The plugin also ships a `UserPromptSubmit` hook (`hooks/hooks.json` →
+`hooks/tldr-context.sh`) that injects the TL;DR convention into every turn of
+every session. This is the one behavior the kit needs *outside* a skill
+invocation: a decision point can arrive at any moment, including in a session
+where no kit skill ever fired, so a skill-scoped instruction would never be
+loaded to see it. The hook extracts its text from the marked range in
+`docs/tldr-convention.md` rather than holding a copy, and exits 0 emitting
+nothing if anything is missing — it can never fail a turn. Note this rides the
+plugin channel only: a `--user` symlink install links `skills/`, `agents/`, and
+`templates/`, not hooks, so the symlink path does not get it.
+
 ### Identity guarantee and the shadow landmine
 
 On a single dev machine, `--user` symlinks make the workflow byte-identical

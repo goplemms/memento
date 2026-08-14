@@ -17,7 +17,7 @@ know whether this thing is worth their afternoon.
 
 ## Expected Shape
 
-Something at this altitude and length (281 characters, bullets of 7-9 words):
+Something at this altitude and length (235 characters, bullets of 7-9 words):
 
 > A box of reusable instructions you hand Claude before a task.
 >
@@ -25,8 +25,6 @@ Something at this altitude and length (281 characters, bullets of 7-9 words):
 > - Personas set the voice and role Claude adopts
 > - Templates are starter files for new ones
 > - Nothing runs on its own — you invoke it
->
-> Want the why, an example, or how to install?
 
 What makes it right:
 
@@ -35,7 +33,8 @@ What makes it right:
   because it contradicts what "kit" implies.
 - **Plain words throughout.** No `SKILL.md`, no "namespaced", no "marketplace" — those
   are the *answers* to the next question, not this one.
-- **The closing line is answerable.** Three named directions beat "any questions?"
+- **It ends.** No "want the why, an example, or how to install?" — that menu would be a
+  guess at what they're after, and the reader knows better than the guess.
 
 ## The Anti-Example
 
@@ -52,10 +51,10 @@ can't tell which sentence matters, and every noun needs its own explanation firs
 
 ## Digging From There
 
-The user picks a thread. The next rung gets more room, stays plain, and still ends on a
-choice:
+The reader asks their own question — sharper than any menu would have been, because it
+names the part *they* snagged on. The next rung gets more room and stays plain:
 
-> **User:** the "nothing runs on its own" one
+> **User:** wait, so nothing runs on its own? what makes a skill fire then
 
 > Right — it's a library, not a robot. Files sit there until something reads them.
 >
@@ -63,11 +62,10 @@ choice:
 > - Claude may also pick one up when it fits
 > - Either way, a session has to start it
 > - No background jobs, no watchers, no schedule
->
-> Want to see a skill's actual text, or how Claude decides to pick one?
 
 Note what did **not** happen: the second answer didn't dump the plugin loading model,
-frontmatter, or precedence rules. Those are rung three, if they're ever asked for.
+frontmatter, or precedence rules. Those are rung three, if they're ever asked for. And it
+stops at the last bullet again — the reader has already shown they'll ask.
 
 ## Notes
 

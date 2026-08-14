@@ -19,7 +19,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Challenge** skill | `skills/challenge/SKILL.md` | The default pre-commit gate in the loop — before committing a milestone that changed real behavior, try to break it; also fire on demand before accepting any plan or theory |
 | **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
 | **Decompose to Issues** skill | `skills/decompose-to-issues/SKILL.md` | A plan needs to become a tracker backlog several sessions can work in parallel, or you've inherited a backlog written before the code existed and need to know which of its claims still hold |
-| **Go Easy On Me** skill | `skills/go-easy-on-me/SKILL.md` | The reader is new to the thing and wants a way in before a wall of text — a tweet-length first rung, then they choose what to dig into |
+| **Go Easy On Me** skill | `skills/go-easy-on-me/SKILL.md` | The reader is new to the thing and wants a way in before a wall of text — a tweet-length first rung that stops at the last bullet, leaving them to ask the question they actually have |
 | **Backlog Reviewer** agent | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
 | **Feature Steward** agent | `agents/feature-steward.md` | A feature spans multiple sessions and the human wants to steer the product without reading code, or technical detail has started crowding out the product decisions |
 
@@ -92,8 +92,8 @@ skills still reference it at their own decision points, which is what tells them
 1. **Iterate on Asset** workflow — draft, try in a practice area, capture eval, revise
 
 ### Explaining something to someone new to it
-1. **Go Easy On Me** — one tweet-length rung: the sentence worth remembering, 3-5 short bullets, and the threads they can pull
-2. *(they pick a thread)* — go one level deeper, still plain, still ending on a choice; repeat until they say they're good
+1. **Go Easy On Me** — one tweet-length rung: the sentence worth remembering, 3-5 short bullets, then stop — no menu of next steps to guess at what they're after
+2. *(they ask their own follow-up)* — go one level deeper, still plain, stop again; repeat until they ask for the full detail outright
 
 ---
 
@@ -134,7 +134,7 @@ Steering a multi-session feature without reading code?
   └─ Yes → Feature Steward — define "done" as user-visible outcomes first
 
 Reader is new to the thing and wants a way in, not a wall of text?
-  └─ Yes → Go Easy On Me — one tweet-length rung, then let them pick the next
+  └─ Yes → Go Easy On Me — one tweet-length rung, stop, let them ask
 ```
 
 ---

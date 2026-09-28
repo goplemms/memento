@@ -29,3 +29,5 @@ This mirrors the phone-home rule for skills — same trust boundary, same gate.
   distribution for the kit. *(Accepted)*
 - [0002](0002-red-team-decisions-before-they-graduate.md) — Red-team decisions
   before they graduate. *(Proposed)*
+- [0003](0003-install-in-cloud-via-environment-setup-script.md) — Install
+  memento in cloud sessions via the environment setup script. *(Accepted)*

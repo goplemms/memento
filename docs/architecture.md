@@ -78,8 +78,9 @@ marketplace pointing at this repo root). Installed as a plugin, `skills/` and
 resolve the kit root via `CLAUDE_PLUGIN_ROOT`. A plugin propagates only these
 channels (skills, agents, commands, hooks, MCP servers) — there is no
 `workflows/` or `personas/` channel, which is why personas live in `agents/`
-and workflows are authored as skills. This is the cloud-first channel — it installs in
-ephemeral/web sessions where the `--user` symlinks don't exist. See ADR-0001.
+and workflows are authored as skills. This is also the channel for
+cloud sessions, where the `--user` symlinks don't exist: there the environment
+setup script installs it (ADR-0001, ADR-0003).
 
 The plugin also ships hooks (`hooks/hooks.json` → `hooks/tldr-context.sh`) that
 inject the TL;DR convention. This is the one behavior the kit needs *outside* a

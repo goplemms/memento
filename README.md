@@ -33,18 +33,17 @@ are the kit's workflows, and both live in `skills/`.
 
 memento is also the single source of truth for a lean planning workflow.
 
-### Install as a plugin (recommended; works in cloud/ephemeral sessions)
+### Install as a plugin (recommended)
 
-memento ships as a self-hosting Claude Code plugin, so it installs the same way
-everywhere — including cloud/web sessions where `~/.claude` symlinks don't exist.
+memento ships as a self-hosting Claude Code plugin.
 
 ```sh
 /plugin marketplace add goplemms/memento
 /plugin install memento@memento
 ```
 
-Or declare it in a consuming repo's `.claude/settings.json` so every session
-(including cloud sessions) auto-installs it:
+Or declare it in a consuming repo's `.claude/settings.json` so local sessions in
+that repo pick it up. Cloud sessions ignore these keys; see the next section.
 
 ```json
 {
@@ -57,6 +56,25 @@ Or declare it in a consuming repo's `.claude/settings.json` so every session
 
 Skills install namespaced, e.g. `memento:orchestrate`. See
 `docs/decisions/0001-adopt-public-plugin-distribution.md` for the why.
+
+### Install in cloud sessions (environment setup script)
+
+Cloud sessions don't install plugins that a repo's `.claude/settings.json`
+declares. Install memento from the cloud environment's **setup script** instead
+(claude.ai/code → environment settings). It runs before Claude Code starts, so
+the plugin loads in every session of that environment, whatever the repo:
+
+```sh
+# memento plugin, tracking main. Edit this date to force a refresh: 2026-09-28
+claude plugin marketplace add goplemms/memento
+claude plugin install memento@memento
+```
+
+The environment caches the setup script's result for about seven days, so new
+sessions pick up changes to `main` within a week. Editing any line of the
+script, such as the date above, rebuilds the cache on the next session. This
+copy also takes precedence over a `memento@synced` copy uploaded to claude.ai.
+See ADR-0003.
 
 ### Install via symlink (single machine)
 

@@ -1,6 +1,6 @@
 # ADR-0001: Adopt public plugin distribution for the kit
 
-- **Status:** Accepted
+- **Status:** Accepted (cloud install mechanism amended by ADR-0003)
 - **Date:** 2026-07-10
 
 ## Context

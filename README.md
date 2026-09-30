@@ -76,6 +76,13 @@ script, such as the date above, rebuilds the cache on the next session. This
 copy also takes precedence over a `memento@synced` copy uploaded to claude.ai.
 See ADR-0003.
 
+### Which build am I on?
+
+Each session opens with a line naming the loaded build, e.g.
+`memento d5dc136 · committed 2026-09-30`, from `hooks/version-banner.sh`.
+Compare it with the tip of `main`; if it's behind, the setup-script cache is
+stale. `claude plugin list` shows the same commit as the plugin's version.
+
 ### Install via symlink (single machine)
 
 For a single dev machine, the symlink install makes editing `~/.claude` the same

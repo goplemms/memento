@@ -1,6 +1,6 @@
 ---
 name: workflow-sync
-description: Make drift capture one command instead of archaeology — detect when a repo's copy of a kit asset has diverged from memento's canonical version in either direction, flag project-scope skills that silently shadow the kit, and reconcile bidirectionally. Use when checking or reconciling drift between a consuming repo and the canonical kit, typically at land time.
+description: Make drift capture one command instead of archaeology — detect when a repo's copy of a kit asset has diverged from memento's canonical version in either direction, flag project-scope skills that silently shadow the kit, catch a stale or inert install of the kit itself, and reconcile bidirectionally. Use when checking or reconciling drift between a consuming repo and the canonical kit, typically at land time.
 ---
 
 # Workflow Sync
@@ -21,6 +21,20 @@ the user-scope kit.
 
 ## Process
 
+0. **Check the install itself is current.** A stale install is drift too, and
+   a silent one: an old copy keeps loading while new skills never arrive. Run
+   `claude plugin list` and check for:
+   - **A symlink install pointing at an old checkout.** If `~/.claude/skills`
+     links into a memento clone, compare that clone to `origin/main`.
+   - **Skills without frontmatter.** Any loaded `SKILL.md` that doesn't start
+     with a `---` block with `name` and `description` is inert to automatic
+     triggering.
+   - **A stale `memento@synced` copy** uploaded to claude.ai. If one is loaded
+     instead of `memento@memento`, it's the one being used.
+   - **A pinned `version`** in `.claude-plugin/plugin.json`. A pinned version
+     stops `claude plugin update` from seeing new commits.
+   Report each finding with the fix. Cloud sessions install from the
+   environment setup script, and local machines use the plugin install.
 1. **Locate kit-sourced assets in the repo.** Two sources of drift:
    - **Vendored copies** — files carrying a `# sourced from memento@<commit>`
      header.

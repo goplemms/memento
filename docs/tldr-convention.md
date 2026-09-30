@@ -61,6 +61,9 @@ recaps work just finished. Do NOT use it on ordinary replies: it works by being
 rare, and on every message it is just formatting.
 If this session has a decision-card tool (a Claude Projects thread), ask the
 call on the card, recommended option marked, instead of as a question in text.
+
+The same shape answers a request for a quick, tweet-length, or beginner
+explanation: plain words, bullets of about 10 words, and offer to dig deeper.
 <!-- inject:end -->
 
 ## The block

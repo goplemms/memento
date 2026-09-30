@@ -8,7 +8,6 @@ A step-by-step reference for which skills and workflows to fire, and when.
 
 | Asset | File | Fires when… |
 |---|---|---|
-| **Repo Exploration** skill | `skills/repo-exploration/SKILL.md` | Starting work in an unfamiliar repo, or before proposing any change |
 | **Discussion to Plan** skill | `skills/discussion-to-plan/SKILL.md` | A fuzzy idea from prior conversation needs a concrete plan document |
 | **Orchestrate** skill | `skills/orchestrate/SKILL.md` | Driving a feature end-to-end (composes Discussion to Plan, Implement, and Land) |
 | **Implement** skill | `skills/implement/SKILL.md` | Executing a single milestone from `plan.md` until tests are green and the gate is demonstrable |
@@ -20,6 +19,9 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
 | **Decompose to Issues** skill | `skills/decompose-to-issues/SKILL.md` | A plan needs to become a tracker backlog several sessions can work in parallel, or you've inherited a backlog written before the code existed and need to know which of its claims still hold |
 | **Backlog Reviewer** agent | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
+| **Ship** skill | `skills/ship/SKILL.md` | Work is done and needs committing, a PR, CI watched to green, a merge on the user's word, a deploy confirmed, or the branch tidied |
+| **Handoff Prompt** skill | `skills/handoff-prompt/SKILL.md` | A fresh session needs to pick up the work cold, or work splits across parallel sessions |
+| **Domain Decisions** skill | `skills/domain-decisions/SKILL.md` | Judgment calls outside engineering need finding and deciding with the domain expert, one at a time |
 | **Feature Steward** agent | `agents/feature-steward.md` | A feature spans multiple sessions and the human wants to steer the product without reading code, or technical detail has started crowding out the product decisions |
 
 ---

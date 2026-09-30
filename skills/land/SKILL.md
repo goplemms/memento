@@ -21,15 +21,15 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 
 ## Process
 
-1. **Final review.** Confirm every milestone is green and its user-testable gate
-   was met. Stage by name and commit/merge per the repo's convention. **When the
-   merge opens a PR, lead the description with a tweet-length (≤280 char),
-   plain-language summary of what the change *gets* the reader and whose work it
-   eases — altitude above the file list, no jargon.** Add ~10-word bullets only
-   where they earn it; push the technical detail below the fold. This is the
-   prose surface of the kit's TL;DR convention
-   (`${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`); worked before/after in
-   `examples/land.md`.
+1. **Final review, then ship.** Confirm every milestone is green and its
+   user-testable gate was met. Then hand the merge to `memento:ship`: commit by
+   name, open the PR, watch CI to green, and merge on the user's word. **The PR
+   description leads with a tweet-length (≤280 char), plain-language summary of
+   what the change *gets* the reader and whose work it eases — altitude above
+   the file list, no jargon.** Add ~10-word bullets only where they earn it;
+   push the technical detail below the fold. This is the prose surface of the
+   kit's TL;DR convention (`${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`);
+   worked before/after in `examples/land.md`.
 2. **Reflect.** Ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier

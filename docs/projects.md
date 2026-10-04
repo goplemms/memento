@@ -55,10 +55,11 @@ the loaded build.
 
 ### Monthly skills-mining routine
 
-The kit is meant to change with how it is used. This routine runs as a fresh
-cloud session on the 1st of each month, reads the last month of
-sessions, and writes a proposal to the shared folder. It doesn't edit the repo
-or open PRs; a person picks what to build.
+The kit is meant to change with how it is used. This routine runs on the 1st
+of each month, reads the last month of sessions, and writes a proposal to the
+shared folder. It doesn't edit the repo or open PRs; a person picks what to
+build. In a private project a routine can't start a fresh session, so create it
+from a project thread and it fires back into that thread each month.
 
 Prompt:
 

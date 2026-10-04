@@ -50,10 +50,14 @@ milestones → graduate the durable record → archive → GC. Driven by the
 
 Three scripts, justified because they automate STRUCTURE (scaffolding,
 date-math GC), not judgment. Each resolves the consuming repo via
-`git rev-parse --show-toplevel`, so one copy works from any repo's cwd.
+`git rev-parse --show-toplevel`, so one copy works from any repo's cwd, and
+asks `workspace-root.sh` where that repo's workspaces live:
+`/mnt/project-files/memento/<repo>/` in a Claude Projects thread (shared by
+every thread and kept after the container is gone), `$MEMENTO_WORKSPACE_ROOT/<repo>/`
+when set, else `scratchpad/`. See `docs/projects.md`.
 
 - `new-feature.sh <name> [--with-agents] [--with-decisions]` — scaffold.
-- `archive-feature.sh <dir>` — date-prefixed move to `scratchpad/archive/`;
+- `archive-feature.sh <dir>` — date-prefixed move to `<workspace root>/archive/`;
   refuses without a complete Closeout.
 - `sweep-archive.sh [--older-than N] [--delete]` — dry-run GC of old archives;
   flags stale active dirs but never auto-deletes them.
@@ -94,6 +98,12 @@ copy is dropped. `UserPromptSubmit` injects for ~19% of turns, keeping it near
 the decision points that arrive deep in a long session. The sampling is stateless
 — it keys off the last hex digit of the per-prompt `prompt_id` UUID, so there is
 no counter file to GC and no parsing of Claude Code's internal transcript format.
+
+`hooks/progress-context.sh` runs on `SessionStart` (`resume|compact`) and puts
+the active feature's `PROGRESS.md` "Current block" back in context, since
+compaction summarizes away exactly the milestone, last green commit and next
+step a long orchestrate run needs. It reads at most the two newest workspaces
+touched in the last 14 days and emits nothing when there are none.
 
 Sampling is load-bearing, not tidiness: injected context is retained per turn
 rather than replaced, so an unsampled per-turn hook costs ~235 tokens every turn

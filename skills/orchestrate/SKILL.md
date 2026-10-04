@@ -19,13 +19,17 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
 - A feature goal (often fuzzy) and the repo it lives in
 - The kit installed as a plugin (so `memento:orchestrate` resolves to this
   canonical file and `${CLAUDE_PLUGIN_ROOT}` points at the kit)
-- A `scratchpad/` workspace (run `${CLAUDE_PLUGIN_ROOT}/bin/new-feature.sh` or
-  `memento:workflow-init` first)
+- A feature workspace (run `${CLAUDE_PLUGIN_ROOT}/bin/new-feature.sh` or
+  `memento:workflow-init` first). `${CLAUDE_PLUGIN_ROOT}/bin/workspace-root.sh`
+  prints where workspaces live: the shared project folder in a Claude Projects
+  thread, so the next thread can pick the feature up, else `scratchpad/`
 
 ## Process
 
 1. **Brief.** Restate the goal in one sentence as a hypothesis. Confirm the repo
-   and the workspace dir.
+   and the workspace dir. If a workspace for this feature already exists under
+   `workspace-root.sh`'s answer, resume from its `PROGRESS.md` instead of
+   starting over.
 2. **Contract.** Use `memento:discussion-to-plan` to converge on an MVP contract:
    north-star goal, non-scope, and ordered milestones. Write `plan.md`. Each
    milestone MUST carry an inline user-testable gate (web → page/button · CLI →
@@ -74,6 +78,12 @@ routing, and **any other point where the user is asked to choose** — a fork
 mid-flow counts even when it is not a formal gate. It does not mean every
 message: the block only stays scannable while it stays rare.
 
+In a Claude Projects thread that offers a decision card, put the call itself on
+the card (for the commit gate: commit, revise, or hold, with commit
+recommended only when tests are green and the challenge survived) and keep the
+TL;DR block leading the reply. Never auto-commit on the card's recommendation;
+a commit still waits for the user's tap or word.
+
 ## Graduation routing (judgment — propose, user confirms)
 
 - **Commit body** — default home for most durable context.
@@ -101,7 +111,7 @@ reflect current truth. Do NOT rewrite healthy docs — only fix passages that ar
 wrong or misleading given the change. This includes **derived docs that render from
 code-fenced sources** — Mermaid diagrams, architecture diagrams, systems atlases, data-flow
 maps: check the diagram itself still matches reality, not just the prose around it (a stale
-diagram rarely reads as plainly-wrong text). Do not touch the scratchpad workspace, migration
+diagram rarely reads as plainly-wrong text). Do not touch the feature workspace, migration
 files, or test files.
 
 After editing, report a one-line summary of every file you changed and what you fixed.

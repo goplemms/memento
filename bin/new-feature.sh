@@ -45,7 +45,8 @@ fi
 TPL="$KIT_ROOT/templates/workflow"
 [ -d "$TPL" ] || { echo "error: templates not found at $TPL" >&2; exit 1; }
 
-DEST="$REPO/scratchpad/$NAME"
+ROOT="$("$KIT_ROOT/bin/workspace-root.sh")"
+DEST="$ROOT/$NAME"
 if [ -e "$DEST" ]; then
   echo "error: $DEST already exists" >&2
   exit 1

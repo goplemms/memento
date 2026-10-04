@@ -59,6 +59,8 @@ the block, where the full detail still lives. Nothing is omitted, only moved.
 Put the block at the TOP when a decision is pending, at the BOTTOM when it
 recaps work just finished. Do NOT use it on ordinary replies: it works by being
 rare, and on every message it is just formatting.
+If this session has a decision-card tool (a Claude Projects thread), ask the
+call on the card, recommended option marked, instead of as a question in text.
 <!-- inject:end -->
 
 ## The block
@@ -134,6 +136,15 @@ rather than a chat block: a ≤280-char plain-language lead saying what the chan
 gets the reader and whose work it eases, ~10-word bullets only where they earn
 it, and the technical detail below its own heading. Worked before/after in
 `examples/land.md`.
+
+## In Claude Projects
+
+Project threads can post a decision card: one question, two to four options
+with a one-line consequence each, one recommended, answered with a tap. When a
+session has that tool, the call goes on the card and the reply does not repeat
+it. The TL;DR block still leads the reply, so the card's question is the only
+place the ask appears and the block says why it matters. Sessions without the
+tool (local, plain web) keep asking in text, exactly as before.
 
 ## The test
 

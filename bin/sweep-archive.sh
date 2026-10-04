@@ -21,12 +21,12 @@ if ! REPO="$(git rev-parse --show-toplevel 2>/dev/null)"; then
   exit 1
 fi
 
-SCRATCH="$REPO/scratchpad"
+SCRATCH="$("$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/workspace-root.sh")"
 ARCHIVE_DIR="$SCRATCH/archive"
 NOW="$(date +%s)"
 CUTOFF=$(( DAYS * 86400 ))
 
-echo "sweep: repo=$REPO ttl=${DAYS}d mode=$([ "$DELETE" -eq 1 ] && echo DELETE || echo dry-run)"
+echo "sweep: root=$SCRATCH ttl=${DAYS}d mode=$([ "$DELETE" -eq 1 ] && echo DELETE || echo dry-run)"
 
 # 1. Archived dirs past TTL (by mtime).
 if [ -d "$ARCHIVE_DIR" ]; then

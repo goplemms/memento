@@ -48,7 +48,10 @@ tracked, and surface any project-scope skills that would shadow the kit.
    sessions" and ADR-0003). That is set once per environment, not per repo, so
    don't add anything cloud-specific here; just tell the user whether their
    environment's setup script already installs memento.
-3. Create `scratchpad/` and `scratchpad/archive/` if absent.
+3. Create `scratchpad/` and `scratchpad/archive/` if absent. In a Claude
+   Projects thread, `${CLAUDE_PLUGIN_ROOT}/bin/workspace-root.sh` points at the
+   shared project folder instead and the structure scripts create it on first
+   use; still wire `scratchpad/` so local sessions on the repo work.
 4. Wire `.gitignore`. A `.gitignore` CANNOT re-include paths under an excluded
    directory, so use a glob + negation, not a bare `scratchpad/`:
 

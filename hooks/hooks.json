@@ -18,6 +18,15 @@
             "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/tldr-context.sh session"
           }
         ]
+      },
+      {
+        "matcher": "resume|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"${CLAUDE_PLUGIN_ROOT}\"/hooks/progress-context.sh"
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [

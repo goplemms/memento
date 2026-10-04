@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # archive-feature.sh <dir>
-# Date-prefixed move of a finished feature workspace to <scratchpad>/archive/.
+# Date-prefixed move of a finished feature workspace to <workspace root>/archive/
+# (see workspace-root.sh).
 # REFUSES to archive unless PROGRESS.md has a completed Closeout section.
 set -euo pipefail
 
@@ -13,11 +14,13 @@ if ! REPO="$(git rev-parse --show-toplevel 2>/dev/null)"; then
   exit 1
 fi
 
-# Accept either an absolute path or a name under scratchpad/.
+ROOT="$("$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/workspace-root.sh")"
+
+# Accept either a path or a name under the workspace root.
 if [ -d "$TARGET" ]; then
   SRC="$(cd "$TARGET" && pwd)"
 else
-  SRC="$REPO/scratchpad/$TARGET"
+  SRC="$ROOT/$TARGET"
 fi
 [ -d "$SRC" ] || { echo "error: no such feature dir: $TARGET" >&2; exit 1; }
 
@@ -34,7 +37,7 @@ if grep -qE '^\s*-\s*\*\*Graduated to:\*\*\s*<' "$PROGRESS"; then
   exit 1
 fi
 
-ARCHIVE_DIR="$REPO/scratchpad/archive"
+ARCHIVE_DIR="$ROOT/archive"
 mkdir -p "$ARCHIVE_DIR"
 STAMP="$(date +%Y-%m-%d)"
 BASE="$(basename "$SRC")"

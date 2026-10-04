@@ -83,6 +83,14 @@ Each session opens with a line naming the loaded build, e.g.
 Compare it with the tip of `main`; if it's behind, the setup-script cache is
 stale. `claude plugin list` shows the same commit as the plugin's version.
 
+### In Claude Projects
+
+Project threads keep feature workspaces in the shared project folder instead of
+the throwaway checkout, put the current milestone back in context after
+compaction, and ask decisions on tap-to-choose cards. There's also a block to
+paste into Project instructions and a monthly skills-mining routine. See
+[docs/projects.md](docs/projects.md).
+
 ### Install via symlink (single machine)
 
 For a single dev machine, the symlink install makes editing `~/.claude` the same
@@ -102,7 +110,7 @@ editing memento — commit it here and every repo on the machine sees it. Ensure
 ### Daily loop
 
 ```sh
-new-feature.sh my-feature --with-decisions   # scaffold scratchpad/my-feature
+new-feature.sh my-feature --with-decisions   # scaffold scratchpad/my-feature (or the shared project folder)
 # ... drive with /orchestrate: plan.md -> milestones -> /land reflection ...
 archive-feature.sh my-feature                # refuses without a Closeout
 sweep-archive.sh                             # dry-run GC of old archives

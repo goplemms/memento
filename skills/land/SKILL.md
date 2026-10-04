@@ -43,10 +43,12 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 4. **Sync check.** Run `memento:workflow-sync` to detect any drift (including
    project-scope skills that shadow the kit) and reconcile.
 5. **Graduate.** Decide where the durable record lives (see `memento:orchestrate`
-   graduation routing); propose, let the user confirm. Fill `PROGRESS.md`
+   graduation routing); propose, let the user confirm (on a decision card when
+   the session offers one). Fill `PROGRESS.md`
    Closeout (Graduated to / Archived).
 6. **Archive + sweep.** Run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh <dir>`
-   (refuses without a complete Closeout), then
+   (refuses without a complete Closeout; it archives within the same workspace
+   root, so a shared-folder feature stays in the shared folder), then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.
 
 ## Outputs

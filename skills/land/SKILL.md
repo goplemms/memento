@@ -30,7 +30,10 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    push the technical detail below the fold. This is the prose surface of the
    kit's TL;DR convention (`${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`);
    worked before/after in `examples/land.md`.
-2. **Reflect.** Ask the two questions while context is fresh:
+2. **Reflect.** `memento:ship` already asked the short version after the merge.
+   Build on its answer rather than asking again. Also read the feature's Review
+   ledger: which reviews found real defects, which were skipped, and why. Then
+   ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier
      (prompting/planning)?

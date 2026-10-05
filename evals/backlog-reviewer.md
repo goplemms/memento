@@ -2,7 +2,7 @@
 
 ## Asset Under Test
 
-`agents/backlog-reviewer.md`, as fired by `skills/decompose-to-issues/SKILL.md` (step 8).
+`skills/decompose-to-issues/reviewer-brief.md`, as fired by `skills/decompose-to-issues/SKILL.md` (step 8).
 
 ## Scenario
 

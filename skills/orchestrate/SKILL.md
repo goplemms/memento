@@ -53,7 +53,11 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    code paths, namespace/edge assumptions the green tests never exercised) and
    trust it only when you can't; fold what survives back in *before* the gate.
    Trivial or purely mechanical changes (docs, config, a rename with green tests)
-   may skip it — say so rather than skipping silently. Only then commit. Never
+   may skip it — say so rather than skipping silently. Record the challenge in
+   the milestone's **Review ledger** row in `PROGRESS.md`, next to implement's
+   code-and-tests review (or `skipped: <why>`). `hooks/review-gate.sh` refuses
+   `git commit` while an in-progress or testable milestone has no row, so the
+   review can't quietly drop out late in a long session. Only then commit. Never
    auto-commit; stage by name and pause for approval — and **lead that pause with
    a TL;DR block** (see "Decision-point summaries" below) so the user can decide
    without reading the whole gate. After a commit that makes a

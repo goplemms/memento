@@ -5,8 +5,8 @@ description: Turn one feature or plan into a set of tracker issues that can actu
 
 <!--
 Save as skills/decompose-to-issues/SKILL.md so the plugin loads it namespaced
-(memento:decompose-to-issues). Composes the `memento:backlog-reviewer` agent for
-its review gate. Produces issues and a sequence, not code.
+(memento:decompose-to-issues). Its review gate runs a read-only subagent with
+`reviewer-brief.md`. Produces issues and a sequence, not code.
 -->
 
 # Decompose to Issues
@@ -81,8 +81,9 @@ rework two sessions later.
    path is exactly the "fake data that looks real" failure, and it is easiest to
    introduce at the phase seam.
 
-8. **Run the review gate.** Dispatch `memento:backlog-reviewer` (read-only) over
-   the whole set plus the repo, before anyone implements. It checks each issue
+8. **Run the review gate.** Spawn a read-only general-purpose subagent (opus
+   when available) with `${CLAUDE_PLUGIN_ROOT}/skills/decompose-to-issues/reviewer-brief.md`
+   over the whole set plus the repo, before anyone implements. It checks each issue
    against the code it cites and every issue against the others: contradicted
    premises, phantom dependencies, duplicate ownership, unverifiable criteria,
    collisions, gaps. Do this even for issues you just wrote — the cross-issue

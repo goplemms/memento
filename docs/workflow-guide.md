@@ -18,7 +18,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | **Challenge** skill | `skills/challenge/SKILL.md` | The default pre-commit gate in the loop — before committing a milestone that changed real behavior, try to break it; also fire on demand before accepting any plan or theory |
 | **Codebase Audit** skill | `skills/codebase-audit/SKILL.md` | A class of problem (data-access inconsistency, orphaned rows, staleness vs docs, dead code, reuse) seems to span the codebase, or you're about to refactor and want the real extent first |
 | **Decompose to Issues** skill | `skills/decompose-to-issues/SKILL.md` | A plan needs to become a tracker backlog several sessions can work in parallel, or you've inherited a backlog written before the code existed and need to know which of its claims still hold |
-| **Backlog Reviewer** agent | `agents/backlog-reviewer.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
+| **Backlog review brief** | `skills/decompose-to-issues/reviewer-brief.md` | The review gate inside Decompose to Issues — auditing a *set* of issues against the code and against each other before anyone implements |
 | **Ship** skill | `skills/ship/SKILL.md` | Work is done and needs committing, a PR, CI watched to green, a merge on the user's word, a deploy confirmed, or the branch tidied |
 | **Handoff Prompt** skill | `skills/handoff-prompt/SKILL.md` | A fresh session needs to pick up the work cold, or work splits across parallel sessions |
 | **Domain Decisions** skill | `skills/domain-decisions/SKILL.md` | Judgment calls outside engineering need finding and deciding with the domain expert, one at a time |
@@ -31,6 +31,7 @@ A step-by-step reference for which skills and workflows to fire, and when.
 | Convention | File | Applies when… |
 |---|---|---|
 | **TL;DR block** | `docs/tldr-convention.md` | Any decision point hands the user something to choose — the commit gate, a red-team readout, an audit's findings, a plan hand-off, a backlog review, or any mid-flow fork. Lead with ≤5 jargon-free bullets of ≤10 words, detail below |
+| **Review gate** | `hooks/review-gate.sh` + `PROGRESS.md` Review ledger | A milestone is `in-progress` or `testable` and something runs `git commit`. The commit is refused until the ledger has a row for that milestone, either the review's result (implement's code-and-tests review, orchestrate's challenge) or `skipped: <why>` |
 
 Unlike everything above, the TL;DR block is not skill-scoped: the plugin's hooks
 (`hooks/hooks.json`) inject it once per session — and again after compaction —
@@ -38,6 +39,12 @@ plus on ~19% of turns to keep it near the decision points that arrive late in a
 long session. So it applies even where no kit skill was ever invoked. The named
 skills still reference it at their own decision points, which is what tells them
 *where* in their output it goes.
+
+The review gate is enforced the same way, by a hook rather than by skill prose.
+Reviews that lived only in a skill's steps were skipped in practice, while a
+repo rule that a hook enforced ran every time. The gate only applies to
+workspaces whose `PROGRESS.md` has a Review ledger section, so older features
+aren't affected.
 
 ---
 
@@ -69,7 +76,7 @@ skills still reference it at their own decision points, which is what tells them
 ### Turning a plan into a backlog several sessions can work
 1. **Repo Exploration** — only if the repo is unfamiliar; the code is the source of truth for every claim an issue will make
 2. **Decompose to Issues** — cut along real code seams, map the file collisions, label the phase boundary, split closeable slices into linked child issues
-3. *(inside step 2)* **Backlog Reviewer** agent — the read-only gate over the whole set: contradicted premises, phantom dependencies, duplicate ownership, unverifiable criteria, collisions, gaps
+3. *(inside step 2)* **Backlog review** subagent — the read-only gate over the whole set: contradicted premises, phantom dependencies, duplicate ownership, unverifiable criteria, collisions, gaps
 4. **Orchestrate** — drive the first issue as a feature; the rest of the backlog is now sequenced and safe to parallelise
 
 ### Inheriting a backlog written before the code existed
@@ -122,7 +129,7 @@ A class of problem seems to span the codebase (or about to refactor)?
   └─ Yes → Codebase Audit (read-only) → Orchestrate the root fix
 
 Plan needs to become issues several sessions can work in parallel?
-  └─ Yes → Decompose to Issues (includes the Backlog Reviewer gate)
+  └─ Yes → Decompose to Issues (includes the backlog review gate)
 
 Inherited a backlog written before the code existed?
   └─ Yes → Decompose to Issues — verify the shared premise first, then review

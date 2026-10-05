@@ -47,12 +47,19 @@ that doesn't need land's reflection ritual.
 7. **Tidy the branch.** List what's left on it that didn't ship. For each item
    propose one of: PR it, adapt it, or drop it. Act only on the user's choice.
    Delete the branch after merge if that's the repo's habit.
+8. **Reflect, briefly.** After the merge, ask one question while context is
+   fresh: what in the kit helped this change, and what got in the way? Write
+   the answer in one or two lines, in the PR as a comment or, inside a feature,
+   in `PROGRESS.md`'s Closeout. If the answer names a kit asset to change, say
+   so; `memento:land` and the monthly skills-mining routine pick those up. Skip
+   it for a one-line fix, and say you skipped it.
 
 ## Outputs
 
 - A merged PR, or a green PR waiting on the user's word
 - The CI and deploy results as observed, with links
 - A short list of anything left on the branch and what was decided for it
+- A one- or two-line reflection: what helped, what got in the way
 
 ## Notes
 

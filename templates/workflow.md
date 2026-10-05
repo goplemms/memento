@@ -20,7 +20,7 @@ both live in skills/.
 ## Purpose
 
 What outcome this workflow produces, and which skills/personas it composes
-(e.g. `memento:repo-exploration`, `memento:curious-builder`).
+(e.g. `memento:implement`, `memento:challenge`).
 
 ## Inputs
 

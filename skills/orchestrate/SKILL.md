@@ -12,7 +12,8 @@ Drive a feature from a fuzzy goal to a merged, durable result through a lean
 loop: brief the goal → back-and-forth to an MVP contract → build in
 user-testable milestones → graduate the durable record → archive → GC. This is
 the kit's top-level workflow; it composes `memento:discussion-to-plan`,
-`memento:implement`, and `memento:land`.
+`memento:implement`, and `memento:land`, and leans on `memento:ship`,
+`memento:handoff-prompt`, and `memento:domain-decisions` along the way.
 
 ## Inputs
 
@@ -38,7 +39,13 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `decisions.md`. Otherwise skip it — stay thin.
 4. **Build a milestone.** Hand the active milestone to `memento:implement`. Keep
    `PROGRESS.md` current: status table, current block (milestone, last-green
-   sha, next step, blockers).
+   sha, next step, blockers). **Delegate by default:** the main session plans,
+   decides, and reviews, and subagents do the reading and the edits, in
+   parallel where the work splits cleanly. Give each subagent a
+   self-contained brief (the shape `memento:handoff-prompt` writes), make
+   research and audit subagents read-only, and pick a cheaper model for
+   mechanical work. Between milestones, check that each running subagent is
+   still on its brief before trusting its output.
 5. **Commit gate.** A milestone is "in progress" until BOTH its tests are green
    AND its user-testable gate is met by the user. Before committing a milestone
    that changed real behavior, run `memento:challenge` on the implementation **as
@@ -57,9 +64,16 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `decisions.md`. Classify first and confirm with the user: a **pivot**
    supersedes the affected decision and re-opens it (and revises the Goal); an
    **adjustment** adds a new milestone (Goal untouched). Superseded entries are
-   never deleted — they keep a "Superseded by" link.
-7. **Iterate** milestones until the plan is satisfied.
+   never deleted — they keep a "Superseded by" link. When the decision is a
+   domain judgment rather than an engineering one (an accounting treatment, a
+   business rule), don't make it: put it to the user through
+   `memento:domain-decisions`.
+7. **Iterate** milestones until the plan is satisfied. When a session has to
+   stop with milestones left (context is full, the user is done for now, or the
+   next step needs different access), write the pickup with
+   `memento:handoff-prompt` instead of leaving the state in chat.
 8. **Land.** Hand off to `memento:land` for the merge ritual and reflection.
+   It uses `memento:ship` for the PR, CI, and merge.
 9. **Graduate → archive → sweep.** Decide where the durable record goes
    (graduation routing below; agent proposes, user confirms), fill `PROGRESS.md`
    Closeout, run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`, then

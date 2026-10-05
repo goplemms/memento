@@ -8,9 +8,9 @@ description: Improve one kit asset (skill, persona, template, example, or eval) 
 ## Purpose
 
 Improve one asset through a small loop of drafting, trying, and revising —
-rather than redesigning it upfront. This is the kit's asset-maintenance loop;
-it composes `memento:curious-builder` (tone) and `memento:repo-exploration`
-(scoped reading).
+rather than redesigning it upfront. This is the kit's asset-maintenance loop.
+Its tone: a practical builder who tries a small version before designing a
+large one, and recommends one concrete next step rather than a menu.
 
 ## Inputs
 
@@ -22,8 +22,9 @@ it composes `memento:curious-builder` (tone) and `memento:repo-exploration`
 
 1. **Pick one asset.** Scope to a single file. If several need work, do them one
    at a time.
-2. **Read the nearest shape.** Use `memento:repo-exploration` to read only the
-   template or an existing example for this asset type — not the whole tree.
+2. **Read the nearest shape, and only that.** Read the template or one existing
+   example for this asset type, not the whole tree. Name the files you read, so
+   it's easy to tell whether the reading stayed scoped.
 3. **Draft small.** Make one small change rather than a full redesign. Prefer a
    single working slice over a broad rewrite.
 4. **Try it.** Exercise the draft in a practice area (or the real flow it serves)
@@ -42,7 +43,8 @@ it composes `memento:curious-builder` (tone) and `memento:repo-exploration`
 
 ## Notes
 
-Keep the loop small and honest, in the spirit of `memento:curious-builder`: one
-draft, one try, one revision beats a speculative framework. If an asset keeps
+Keep the loop small and honest: one draft, one try, one revision beats a
+speculative framework. Don't abstract early or add process before it proves
+useful, and ask what each attempt taught before choosing the next. If an asset keeps
 causing friction across features, that is a signal to reflect on it at
 `memento:land` time and upstream the improvement — not to grow process here.

@@ -47,7 +47,9 @@ see the rejected alternative below.
   opposite of the independence the gate depends on. The second round is the
   author's revision re-attacked by fresh independent critics instead. (A defender
   survives only as an opt-in, off-by-default contrarian pass surfaced *alongside*
-  the objections, for A/B-testing capitulation bias — never as the default.)
+  the objections, for A/B-testing capitulation bias — never as the default.
+  Update 2026-10-05: the opt-in pass was removed. It was never run, so the
+  A/B never happened.)
 
 ## Consequences
 

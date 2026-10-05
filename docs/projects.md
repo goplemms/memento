@@ -65,9 +65,26 @@ Prompt:
 
 ```text
 Mine my Claude Code sessions from the last 30 days, across all repos, for how
-the memento plugin (github.com/goplemms/memento) is actually used. For each
-skill, agent and hook: how often it fired or should have, where it helped,
-where sessions worked around it or repeated a procedure no skill covers.
+the memento plugin (github.com/goplemms/memento) is actually used.
+
+Keep it cheap: start from session titles and last-turn summaries, and open full
+transcripts only for sessions that look relevant (kit skills used, feature
+work, reviews, repeated asks). list_events returns the newest page first, so
+page older events with before_id, and read a session's opening before judging
+what it invoked.
+
+1. Usage. For each skill, agent and hook: how often it fired or should have,
+   where it helped, where sessions worked around it or repeated a procedure no
+   skill covers.
+2. Review gates. For each milestone commit: reviews the kit expected
+   (implement's code-and-tests review, orchestrate's challenge, the
+   discussion-to-plan red-team, the decompose-to-issues review gate), reviews
+   that ran, review-gate refusals, "skipped: <why>" ledger rows, and findings
+   acted on vs. dropped. Also read the PROGRESS.md Review ledgers in the shared
+   folder. Name any review that never runs.
+3. Reflections. Collect the one-line "what helped, what got in the way" notes
+   that ship and land leave, grouped by kit asset.
+
 Propose changes as add, modify, merge or remove, each with one line of evidence
 (a session and what happened in it). Write the report to
 /mnt/project-files/memento/skills-mining/<yyyy-mm-dd>.md when that folder

@@ -80,8 +80,16 @@ See ADR-0003.
 
 Each session opens with a line naming the loaded build, e.g.
 `memento d5dc136 · committed 2026-09-30`, from `hooks/version-banner.sh`.
-Compare it with the tip of `main`; if it's behind, the setup-script cache is
-stale. `claude plugin list` shows the same commit as the plugin's version.
+When that build isn't the tip of `main`, the line says so and names the fix:
+`· behind main (347b6da): run claude plugin update memento@memento`. In a
+cloud session the fix is to edit the setup script's date line instead. The
+check needs network; offline, the line just names the build. `claude plugin
+list` shows the same commit as the plugin's version.
+
+The line also names old copies of kit skills in `~/.claude/skills` or the
+project's `.claude/skills`, such as links left from the pre-plugin install.
+They answer to the bare name (`/orchestrate`) with stale instructions; delete
+them and use the plugin's `memento:` skills.
 
 ### In Claude Projects
 

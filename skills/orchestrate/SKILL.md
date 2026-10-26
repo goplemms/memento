@@ -72,6 +72,10 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    domain judgment rather than an engineering one (an accounting treatment, a
    business rule), don't make it: put it to the user through
    `memento:domain-decisions`.
+   A smaller correction (a tweak, a fix to the current approach, an extra
+   ask) is neither: append it to `PROGRESS.md`'s **Queue**, finish the step in
+   hand, then work the queue top down. A milestone isn't done while its queue
+   has items (`docs/working-rules.md`).
 7. **Iterate** milestones until the plan is satisfied. When a session has to
    stop with milestones left (context is full, the user is done for now, or the
    next step needs different access), write the pickup with

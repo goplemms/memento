@@ -87,7 +87,8 @@ cloud sessions, where the `--user` symlinks don't exist: there the environment
 setup script installs it (ADR-0001, ADR-0003).
 
 The plugin also ships hooks (`hooks/hooks.json` → `hooks/tldr-context.sh`) that
-inject the TL;DR convention. This is the one behavior the kit needs *outside* a
+inject the TL;DR convention and the working rules (`docs/working-rules.md`, such
+as queueing mid-task corrections). This is the one behavior the kit needs *outside* a
 skill invocation: a decision point can arrive at any moment, including in a
 session where no kit skill ever fired, so a skill-scoped instruction would never
 be loaded to see it.
@@ -100,7 +101,8 @@ the decision points that arrive deep in a long session. The sampling is stateles
 no counter file to GC and no parsing of Claude Code's internal transcript format.
 
 `hooks/progress-context.sh` runs on `SessionStart` (`resume|compact`) and puts
-the active feature's `PROGRESS.md` "Current block" back in context, since
+the active feature's `PROGRESS.md` "Current block", and any queued corrections,
+back in context, since
 compaction summarizes away exactly the milestone, last green commit and next
 step a long orchestrate run needs. It reads at most the two newest workspaces
 touched in the last 14 days and emits nothing when there are none.

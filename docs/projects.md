@@ -20,7 +20,8 @@ per thread. It is working state only: the durable record still graduates into
 the repo at land time.
 
 **The current milestone survives compaction.** `hooks/progress-context.sh`
-re-injects the active feature's "Current block" on resume and after compaction.
+re-injects the active feature's "Current block" and its Queue of waiting
+corrections on resume and after compaction.
 Project threads start above the repo clones, so outside a repo it reads every
 repo's workspaces in the shared folder.
 

@@ -21,8 +21,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 
 ## Process
 
-1. **Final review, then ship.** Confirm every milestone is green and its
-   user-testable gate was met. Then hand the merge to `memento:ship`: commit by
+1. **Final review, then ship.** Confirm every milestone is green, its
+   user-testable gate was met, and `PROGRESS.md`'s Queue is empty. Then hand the merge to `memento:ship`: commit by
    name, open the PR, watch CI to green, and merge on the user's word. **The PR
    description leads with a tweet-length (≤280 char), plain-language summary of
    what the change *gets* the reader and whose work it eases — altitude above

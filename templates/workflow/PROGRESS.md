@@ -19,6 +19,19 @@ States: `todo` → `in-progress` → `testable` → `done`
 - **Next step:** <the single next action>
 - **Blockers:** <none | what is blocking>
 
+## Queue
+
+Corrections and tweaks the user made mid-step, in arrival order, one `- `
+item each. Finish the current step, then work them top down, and delete
+each item once done. A correction that says the current step is wrong is not
+queued: it is a pivot or adjustment (see `decisions.md`).
+
+## Kit gaps
+
+Each mistake the user corrected that traces to an instruction: which one (a
+skill, CLAUDE.md, the plan) and the fix you'd propose, one `- ` item each.
+`memento:land` reads this at reflection.
+
 ## Review ledger
 
 One row per milestone, added once its review is done: what reviewed it, what

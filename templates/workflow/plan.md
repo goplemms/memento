@@ -5,6 +5,26 @@
 One sentence describing the durable outcome. Revise this ONLY on a real pivot,
 never to track day-to-day progress.
 
+## Rigor
+
+**Level:** <quick | internal | production>
+
+Sets how much engineering and review the feature gets. Build to the level, no
+further; when more would help, suggest it as a scope change instead of doing it.
+
+- **quick:** a spike or throwaway. Smallest thing that works, happy-path tests.
+  implement's `/simplify` and reviewer still run; the commit-gate challenge is
+  skipped (the ledger row says `challenge skipped: rigor quick`).
+- **internal:** a tool you or your team rely on. The loop's default:
+  implement's review on every milestone except purely mechanical ones, and the
+  challenge on every milestone that changes behavior.
+- **production:** users, money or data depend on it. As internal, plus failure
+  paths tested, and `/code-review high` (and `/security-review` when it touches
+  input, auth or stored data) before the commit gate.
+
+Changing the level mid-feature is the user's call: confirm it, record it in
+`decisions.md` (or under Notes below), and say so in the next ledger row.
+
 ## Non-scope
 
 - What this feature explicitly will NOT do

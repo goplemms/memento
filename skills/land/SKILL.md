@@ -21,8 +21,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 
 ## Process
 
-1. **Final review, then ship.** Confirm every milestone is green and its
-   user-testable gate was met. Then hand the merge to `memento:ship`: commit by
+1. **Final review, then ship.** Confirm every milestone is green, its
+   user-testable gate was met, and `PROGRESS.md`'s Queue is empty. Then hand the merge to `memento:ship`: commit by
    name, open the PR, watch CI to green, and merge on the user's word. **The PR
    description leads with a tweet-length (≤280 char), plain-language summary of
    what the change *gets* the reader and whose work it eases — altitude above
@@ -32,7 +32,10 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    worked before/after in `examples/land.md`.
 2. **Reflect.** `memento:ship` already asked the short version after the merge.
    Build on its answer rather than asking again. Also read the feature's Review
-   ledger: which reviews found real defects, which were skipped, and why. Then
+   ledger (which reviews found real defects, which were skipped, and why) and
+   its Kit gaps: each is a proposed instruction fix for step 3, made where that
+   instruction lives (a kit asset in memento, a repo's CLAUDE.md in that repo),
+   or dropped with a reason if the user disagrees. Then
    ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier

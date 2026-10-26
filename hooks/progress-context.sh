@@ -3,7 +3,8 @@
 #
 # Compaction summarizes away exactly what a long orchestrate run needs most:
 # which milestone is active, the last green commit, and the next step. That
-# lives in PROGRESS.md's "Current block", so re-inject it verbatim.
+# lives in PROGRESS.md's "Current block", so re-inject it verbatim, plus the
+# "Queue" of corrections still waiting, when it has any.
 #
 # Finding the workspace:
 #   - inside a repo: the feature dirs under bin/workspace-root.sh's answer
@@ -36,6 +37,11 @@ BODY="Active memento feature workspace(s), from PROGRESS.md. Resume from the
 current block; read plan.md beside it before changing course."
 while IFS= read -r f; do
   BLOCK="$(sed -n '/^## Current block/,/^## /p' "$f" | sed '1d;/^## /d')"
+  # Only "- " items count, so the template's guidance text alone adds nothing.
+  QUEUE="$(sed -n '/^## Queue/,/^## /p' "$f" | sed '1d;/^## /d' | grep '^- ')"
+  [ -z "$QUEUE" ] || BLOCK="$BLOCK
+Queue (corrections waiting, in order):
+$QUEUE"
   [ -n "$(printf '%s' "$BLOCK" | tr -d '[:space:]')" ] || continue
   BODY="$BODY
 
@@ -44,7 +50,7 @@ $BLOCK"
 done <<< "$FILES"
 
 ESCAPED="$(printf '%s' "$BODY" \
-           | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\t/ /g' \
+           | sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e 's/\t/ /g' -e 's/\r//g' \
            | awk '{ printf "%s\\n", $0 }')" || exit 0
 
 printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' \

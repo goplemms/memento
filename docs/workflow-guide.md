@@ -61,7 +61,7 @@ aren't affected.
 ### Driving a full feature (the main loop)
 1. `new-feature.sh <name>` (or `/workflow-init` if the repo isn't set up yet) — scaffold the workspace
 2. **Orchestrate** — runs the full loop internally:
-   - Calls **Discussion to Plan** to write `plan.md` with milestones and user-testable gates
+   - Calls **Discussion to Plan** to write `plan.md` with a rigor level, milestones and user-testable gates
    - Calls **Implement** once per milestone until tests are green and the gate is met
    - Runs **Challenge** as the default commit gate — breaks each behavior-changing milestone before it's committed
    - Calls **Land** at the end for merge, reflection, and any kit improvements

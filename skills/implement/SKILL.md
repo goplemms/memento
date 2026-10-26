@@ -23,9 +23,12 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
    means for THIS milestone in one sentence.
 2. If using subagents, write/refresh `agents.md` for the current milestone only:
    each agent's concern, files, do-not-touch, exit criteria.
-3. Make the smallest change that moves the milestone forward. Prefer one working
-   slice over a broad scaffold.
-4. Run the tests. Keep going until they are green.
+3. Make the smallest change that moves the milestone forward, built to the
+   plan's Rigor level and no further. Prefer one working slice over a broad
+   scaffold; suggest new features beyond it as a scope change instead of
+   building them. A test for a defect a review found is never scope creep.
+4. Run the tests. Keep going until they are green. At `production` rigor, also
+   test the failure paths (bad input, missing data, a dependency that errors).
 5. **Review the code and the tests.** Don't skip this step: your own pass
    shares your blind spots, and when these reviews ran in past sessions they
    kept finding real bugs in Claude's own work. On the milestone's diff:
@@ -43,6 +46,10 @@ and its user-testable gate can be demonstrated. Scoped, one milestone at a time.
      mechanical change (docs, config, a rename with green tests), write
      `skipped: <why>` instead. `hooks/review-gate.sh` stops the commit until
      the row exists.
+   - The plan's **Rigor** level (default `internal`) never removes this step:
+     `quick` still runs `/simplify` and the reviewer. `production` adds
+     `/code-review high`, plus `/security-review` when the change touches
+     input, auth or stored data; name both in the ledger row.
 6. Demonstrate the user-testable gate (run the command, point at the page,
    invoke the runner) so the user can confirm it.
 7. Update `PROGRESS.md`: move the milestone `in-progress` → `testable`, record

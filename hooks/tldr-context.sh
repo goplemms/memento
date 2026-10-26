@@ -1,5 +1,5 @@
 #!/bin/bash
-# Keep the TL;DR convention in context, cheaply.
+# Keep the TL;DR convention and the working rules in context, cheaply.
 #
 # Invoked two ways from hooks/hooks.json:
 #
@@ -25,7 +25,8 @@
 # Floor + 19% sampling costs ~235 per session plus ~45/turn amortized.
 #
 # Single source of truth: the text is extracted from the marked range in
-# docs/tldr-convention.md, so there is no second copy to drift.
+# docs/tldr-convention.md, then the one in docs/working-rules.md, so there is
+# no second copy to drift. A missing or empty doc is skipped.
 #
 # Never fails the turn (always exits 0); on any error it emits nothing, which
 # Claude Code treats as a no-op.
@@ -57,12 +58,17 @@ case "$MODE" in
 esac
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)" || exit 0
-DOC="$ROOT/docs/tldr-convention.md"
-[ -r "$DOC" ] || exit 0
+BODY=""
+for DOC in "$ROOT/docs/tldr-convention.md" "$ROOT/docs/working-rules.md"; do
+  [ -r "$DOC" ] || continue
+  # Pull the operative short form out of the doc, dropping the marker lines.
+  PART="$(sed -n '/<!-- inject:start -->/,/<!-- inject:end -->/p' "$DOC" \
+          | sed '1d;$d')" || continue
+  [ -n "$PART" ] || continue
+  BODY="${BODY:+$BODY
 
-# Pull the operative short form out of the doc, dropping the marker lines.
-BODY="$(sed -n '/<!-- inject:start -->/,/<!-- inject:end -->/p' "$DOC" \
-        | sed '1d;$d')" || exit 0
+}$PART"
+done
 [ -n "$BODY" ] || exit 0
 
 # Escape for embedding as a JSON string: backslashes, then quotes, then fold

@@ -32,7 +32,7 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `workspace-root.sh`'s answer, resume from its `PROGRESS.md` instead of
    starting over.
 2. **Contract.** Use `memento:discussion-to-plan` to converge on an MVP contract:
-   north-star goal, non-scope, and ordered milestones. Write `plan.md`. Each
+   north-star goal, rigor level, non-scope, and ordered milestones. Write `plan.md`. Each
    milestone MUST carry an inline user-testable gate (web → page/button · CLI →
    command + output · lib → invokable runner).
 3. **Open the ledger (opt-in).** For contested or multi-track work, scaffold
@@ -53,7 +53,10 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    code paths, namespace/edge assumptions the green tests never exercised) and
    trust it only when you can't; fold what survives back in *before* the gate.
    Trivial or purely mechanical changes (docs, config, a rename with green tests)
-   may skip it — say so rather than skipping silently. Record the challenge in
+   may skip it — say so rather than skipping silently — and so may any
+   milestone in a plan whose **Rigor** is `quick` (`challenge skipped: rigor
+   quick`; implement's review still runs). Lowering the level mid-feature is
+   the user's call, recorded like any other decision. Record the challenge in
    the milestone's **Review ledger** row in `PROGRESS.md`, next to implement's
    code-and-tests review (or `skipped: <why>`). `hooks/review-gate.sh` refuses
    `git commit` while an in-progress or testable milestone has no row, so the

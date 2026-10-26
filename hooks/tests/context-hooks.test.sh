@@ -20,6 +20,15 @@ check() {  # check <name> <output> <expected substring> [absent substring]
 SESSION="$(bash "$ROOT/hooks/tldr-context.sh" session </dev/null)"
 check "session: TL;DR rule" "$SESSION" "TL;DR convention"
 check "session: queue rule" "$SESSION" "Corrections queue" "inject:start"
+check "session: gap rule" "$SESSION" "Mistakes point to a gap"
+check "session: gap rule logs to Kit gaps" "$SESSION" "skip the\napology"
+check "sampled turn: gap rule" "$(printf '{"prompt_id":"abc1"}' | bash "$ROOT/hooks/tldr-context.sh" sample)" "Kit gaps"
+
+# Land must read the same section name the template writes.
+grep -q '^## Kit gaps' "$ROOT/templates/workflow/PROGRESS.md" && grep -q 'Kit gaps' "$ROOT/skills/land/SKILL.md" \
+  && echo "ok   Kit gaps: template section, land reads it" || { echo "FAIL Kit gaps wiring"; FAIL=1; }
+grep -q '^## Rigor' "$ROOT/templates/workflow/plan.md" \
+  && echo "ok   plan template has Rigor" || { echo "FAIL plan template Rigor"; FAIL=1; }
 
 # A prompt_id ending in 0 is sampled; one ending in f is not.
 SAMPLED="$(printf '{"prompt_id":"abc0"}' | bash "$ROOT/hooks/tldr-context.sh" sample)"
@@ -42,12 +51,14 @@ check "template queue: guidance not injected" "$(progress)" "Next step" "Queue (
 
 python3 - "$WS/PROGRESS.md" <<'PY'
 import sys; p=sys.argv[1]; s=open(p).read()
-s=s.replace("## Review ledger", "- rename the flag\n- add a test for empty input\n\n## Review ledger")
+s=s.replace("## Kit gaps", "- rename the flag\n- add a test for empty input\n\n## Kit gaps")
+s=s.replace("## Review ledger", "- gap: implement never said X\n\n## Review ledger")
 open(p,"w").write(s)
 PY
 OUT="$(progress)"
 check "queued items injected" "$OUT" 'Queue (corrections waiting, in order):\n- rename the flag\n- add a test for empty input'
 check "ledger not leaked into queue" "$OUT" "Next step" "Reviewed by"
+check "kit gaps not leaked into queue" "$OUT" "Next step" "gap: implement"
 
 # Windows line endings must not put raw carriage returns into the JSON.
 sed -i 's/$/\r/' "$WS/PROGRESS.md"

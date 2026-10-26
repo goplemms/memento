@@ -40,9 +40,10 @@ milestones → graduate the durable record → archive → GC. Driven by the
 
 ### Workflow templates (`templates/workflow/`)
 
-- `plan.md` — north-star goal · non-scope · ordered milestones, each with an
-  inline user-testable gate.
-- `PROGRESS.md` — resume/survival file: status table, current block, closeout.
+- `plan.md` — north-star goal · rigor level · non-scope · ordered milestones,
+  each with an inline user-testable gate.
+- `PROGRESS.md` — resume/survival file: status table, current block, queue of
+  waiting corrections, kit gaps, review ledger, closeout.
 - `decisions.md` (opt-in) — ledger for contested work; supersede, never delete.
 - `agents.md` (opt-in) — per-subagent scope for the current milestone.
 

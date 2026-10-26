@@ -21,6 +21,12 @@ then take the correction next; in a memento feature, add it to `PROGRESS.md`'s
 Queue. Switch at once only when the correction says the current step itself is
 wrong, or the user says stop. A question still gets its answer right away. Work
 is done when the queue is empty, not when the first item is.
+
+**Mistakes point to a gap.** When the user corrects a mistake of yours, skip the
+apology. Name in one line which instruction (a skill, CLAUDE.md, the plan) let
+it happen and the fix you'd make to it; in a memento feature, also log it under
+`PROGRESS.md`'s Kit gaps, where land's reflection picks it up. If it was a plain
+slip with no instruction behind it, say that instead of inventing a gap.
 <!-- inject:end -->
 
 ## Reasoning
@@ -33,3 +39,10 @@ orchestrate loop that case is a pivot or adjustment and goes through the ledger
 courier; the Queue holds everything smaller. `hooks/progress-context.sh`
 re-injects the Queue with the current block after compaction, so queued items
 survive a long session.
+
+**The gap.** Apologies don't change the next session; a fixed instruction does.
+Naming the gap at the moment of the correction catches it while the cause is
+clear, and logging it lets `memento:land` turn it into a kit edit instead of
+relying on memory at the end. The post this came from said mistakes *always*
+mean an instruction gap; the kit keeps the slip exception so the log stays
+honest and doesn't fill with invented causes.

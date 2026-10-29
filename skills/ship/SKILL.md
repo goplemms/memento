@@ -32,7 +32,13 @@ that doesn't need land's reflection ritual.
    a tweet-length (≤280 characters) plain-language summary of what the change
    gets the reader, then short bullets, then the technical detail under its own
    heading (the prose form of `${CLAUDE_PLUGIN_ROOT}/docs/tldr-convention.md`;
-   worked example in `examples/land.md`).
+   worked example in `examples/land.md`). When the change ships an `idea`
+   issue, or changes behavior without one (then file one first), get the
+   issue ready *before* the merge closes it: fill its **Did it fire?** line,
+   add `fire:watching` (or comment `n/a: <why>` when nothing could show it),
+   and put `Closes #N` in the PR body (`Closes owner/repo#N` for an issue in
+   another repo). Closing keywords only act on a merge to the default branch;
+   otherwise close it yourself after the merge. Scheme: `${CLAUDE_PLUGIN_ROOT}/docs/ideas.md`.
 4. **Watch CI.** Wait for it to finish rather than guessing. When it fails, read
    the log, reproduce locally, fix the root cause, and push. Never skip or
    disable a test to get green, and never retry a real failure as a "flake".
@@ -50,8 +56,10 @@ that doesn't need land's reflection ritual.
 8. **Reflect, briefly.** After the merge, ask one question while context is
    fresh: what in the kit helped this change, and what got in the way? Write
    the answer in one or two lines, in the PR as a comment or, inside a feature,
-   in `PROGRESS.md`'s Closeout. If the answer names a kit asset to change, say
-   so; `memento:land` and the monthly skills-mining routine pick those up. Skip
+   in `PROGRESS.md`'s Closeout. If the answer names a kit asset to change and
+   it isn't changed now, file it as an `idea` issue (search for a duplicate
+   first), so it becomes work instead of a note. Inside a feature,
+   `memento:land` does this. Skip
    it for a one-line fix, and say you skipped it.
 
 ## Outputs

@@ -35,7 +35,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    ledger (which reviews found real defects, which were skipped, and why) and
    its Kit gaps: each is a proposed instruction fix for step 3, made where that
    instruction lives (a kit asset in memento, a repo's CLAUDE.md in that repo),
-   or dropped with a reason if the user disagrees. Then
+   or dropped with a reason if the user disagrees. One that won't be fixed in
+   this feature becomes an issue in step 4. Then
    ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier
@@ -46,13 +47,30 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    against memento. Don't leave the improvement stranded in the consuming repo.
    If the repo carries a vendored/forked copy, hand off to
    `memento:workflow-sync` to upstream it (repo → memento).
-4. **Sync check.** Run `memento:workflow-sync` to detect any drift (including
+4. **File the leftovers as issues.** Every Kit gap, review finding or
+   reflection follow-up this feature did not fix becomes an `idea` issue
+   (with an `effort:` label) in the repo it belongs to, with this feature as
+   its Source; nothing is left only in the archive. Search for a duplicate
+   first and comment on it instead. Then check the feature's own `idea` issue
+   (named in `PROGRESS.md`; ship got it ready before the merge): closed as
+   completed, a **Did it fire?** line saying `look for: <what a real session
+   would show if the change works>`, concrete enough that the weekly pulse
+   can spot it in a transcript or a workspace, and `fire:watching`, or a
+   comment `n/a: <why>` when nothing could show it (a removal). Fix whatever
+   is missing. The scheme, labels and issue body are in
+   `${CLAUDE_PLUGIN_ROOT}/docs/ideas.md`. Name every issue on Closeout's
+   **Issues** line (`#41, #42`, or `owner/repo#7` in another repo). Write
+   `none: <why>` there only when the feature had no issue and left nothing
+   (a spike); `archive-feature.sh` refuses anything else. If this session
+   can't reach GitHub, say so and leave the workspace unarchived until a
+   session that can files them.
+5. **Sync check.** Run `memento:workflow-sync` to detect any drift (including
    project-scope skills that shadow the kit) and reconcile.
-5. **Graduate.** Decide where the durable record lives (see `memento:orchestrate`
+6. **Graduate.** Decide where the durable record lives (see `memento:orchestrate`
    graduation routing); propose, let the user confirm (on a decision card when
    the session offers one). Fill `PROGRESS.md`
-   Closeout (Graduated to / Archived).
-6. **Archive + sweep.** Run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh <dir>`
+   Closeout (Graduated to / Issues / Archived).
+7. **Archive + sweep.** Run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh <dir>`
    (refuses without a complete Closeout; it archives within the same workspace
    root, so a shared-folder feature stays in the shared folder), then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.
@@ -62,6 +80,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 - Merged feature
 - A reflection note (what helped / didn't)
 - Any improved workflow asset committed back to memento
+- `idea` issues for the leftovers, and the feature's own issue closed with
+  `fire:watching` and a "did it fire?" line
 - A completed Closeout, archived workspace, swept archive
 
 ## Notes

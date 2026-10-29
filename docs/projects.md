@@ -74,6 +74,8 @@ work, reviews, repeated asks). list_events returns the newest page first, so
 page older events with before_id, and read a session's opening before judging
 what it invoked.
 
+0. Ideas. Run the weekly "did it fire?" check below first, then start from
+   the open `idea` issues rather than from old brainstorms.
 1. Usage. For each skill, agent and hook: how often it fired or should have,
    where it helped, where sessions worked around it or repeated a procedure no
    skill covers.
@@ -87,8 +89,32 @@ what it invoked.
    that ship and land leave, grouped by kit asset.
 
 Propose changes as add, modify, merge or remove, each with one line of evidence
-(a session and what happened in it). Write the report to
+(a session and what happened in it), and file each one as an `idea` issue
+(search for a duplicate first). Write the report to
 /mnt/project-files/memento/skills-mining/<yyyy-mm-dd>.md when that folder
 exists, otherwise publish it as a private artifact. Do not edit the repository
-or open pull requests.
+or open pull requests; filing, labelling and commenting on `idea` issues are
+the only changes outside the report it makes.
+```
+
+### Weekly "did it fire?" check
+
+A change that never reaches a session should be caught within weeks, not at
+the next monthly run. Put this in a routine that runs weekly (in this project,
+the weekly pulse), or run it as the first step of the monthly prompt above.
+
+```text
+Check that shipped ideas reached real use. The scheme is in
+docs/ideas.md of github.com/goplemms/memento.
+Search each repo the project works on (here: goplemms/memento) for issues
+with label:"fire:watching". For each,
+read its "Did it fire?" line and look for that sign in the sessions and
+workspaces since the issue closed. If you find it, comment where (session or
+workspace, date) and swap the label to fire:seen. If not, comment
+"not yet, <date>: <what you checked>". Once four weeks of sessions that should
+have shown it show nothing, swap the label to fire:never, comment why, and
+open a new idea issue for that failure. Then read the open idea issues for
+the status of earlier ideas: file each new idea you find as an idea issue
+(search for a duplicate first), and when a thread picks one up, label it
+picked and comment which thread. Report what you changed.
 ```

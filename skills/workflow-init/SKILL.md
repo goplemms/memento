@@ -70,8 +70,7 @@ tracked, and surface any project-scope skills that would shadow the kit.
 6. Confirm the structure scripts resolve under the installed plugin:
    `${CLAUDE_PLUGIN_ROOT}/bin/new-feature.sh`,
    `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`,
-   `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh`,
-   `${CLAUDE_PLUGIN_ROOT}/bin/ideas-ledger.sh`.
+   `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh`.
 
 ## Outputs
 

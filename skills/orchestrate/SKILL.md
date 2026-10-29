@@ -30,7 +30,9 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
 1. **Brief.** Restate the goal in one sentence as a hypothesis. Confirm the repo
    and the workspace dir. If a workspace for this feature already exists under
    `workspace-root.sh`'s answer, resume from its `PROGRESS.md` instead of
-   starting over.
+   starting over. When the feature picks up an `idea` issue
+   (`docs/ideas.md`), label it `picked`, comment who is working it, and note
+   its number at the top of `PROGRESS.md` for ship and land.
 2. **Contract.** Use `memento:discussion-to-plan` to converge on an MVP contract:
    north-star goal, rigor level, non-scope, and ordered milestones. Write `plan.md`. Each
    milestone MUST carry an inline user-testable gate (web → page/button · CLI →
@@ -85,8 +87,9 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `memento:handoff-prompt` instead of leaving the state in chat.
 8. **Land.** Hand off to `memento:land` for the merge ritual and reflection.
    It uses `memento:ship` for the PR, CI, and merge.
-9. **Ledger → graduate → archive → sweep.** Route leftovers and the "did it
-   fire?" line to the ideas ledger (`memento:land` step 4), decide where the
+9. **Issues → graduate → archive → sweep.** File leftovers as `idea` issues
+   and mark the feature's issue for the "did it fire?" check (`memento:land`
+   step 4), decide where the
    durable record goes (graduation routing below; agent proposes, user
    confirms), fill `PROGRESS.md` Closeout, run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`, then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.

@@ -52,4 +52,5 @@ Filled in only when the feature is finished. `archive-feature.sh` REFUSES to
 archive until this section is complete.
 
 - **Graduated to:** <commit body | architecture doc | README | nothing (spike) | memento (workflow asset improved)>
+- **Ledger:** <ideas-ledger row IDs added or updated: leftovers as open, this feature as shipped with a "did it fire?" line | none: <why> (no leftovers and nothing to watch)>
 - **Archived:** <no | yyyy-mm-dd>

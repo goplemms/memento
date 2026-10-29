@@ -49,8 +49,8 @@ milestones → graduate the durable record → archive → GC. Driven by the
 
 ### Structure scripts (`bin/`)
 
-Three scripts, justified because they automate STRUCTURE (scaffolding,
-date-math GC), not judgment. Each resolves the consuming repo via
+The scripts are justified because they automate STRUCTURE (scaffolding,
+date-math GC), not judgment. The workspace scripts resolve the consuming repo via
 `git rev-parse --show-toplevel`, so one copy works from any repo's cwd, and
 asks `workspace-root.sh` where that repo's workspaces live:
 `/mnt/project-files/memento/<repo>/` in a Claude Projects thread (shared by
@@ -62,6 +62,10 @@ when set, else `scratchpad/`. See `docs/projects.md`.
   refuses without a complete Closeout.
 - `sweep-archive.sh [--older-than N] [--delete]` — dry-run GC of old archives;
   flags stale active dirs but never auto-deletes them.
+- `ideas-ledger.sh` — prints the path of the project's ideas ledger
+  (`/mnt/project-files/memento/ideas.md` in a Projects thread, else
+  `scratchpad/ideas.md`, `$MEMENTO_IDEAS_LEDGER` when set), creating it from
+  `templates/ideas.md` if missing. It works outside a repo in a Projects thread.
 
 ### Install layer (`install.sh`)
 

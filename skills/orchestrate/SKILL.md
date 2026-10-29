@@ -85,9 +85,10 @@ the kit's top-level workflow; it composes `memento:discussion-to-plan`,
    `memento:handoff-prompt` instead of leaving the state in chat.
 8. **Land.** Hand off to `memento:land` for the merge ritual and reflection.
    It uses `memento:ship` for the PR, CI, and merge.
-9. **Graduate → archive → sweep.** Decide where the durable record goes
-   (graduation routing below; agent proposes, user confirms), fill `PROGRESS.md`
-   Closeout, run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`, then
+9. **Ledger → graduate → archive → sweep.** Route leftovers and the "did it
+   fire?" line to the ideas ledger (`memento:land` step 4), decide where the
+   durable record goes (graduation routing below; agent proposes, user
+   confirms), fill `PROGRESS.md` Closeout, run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh`, then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.
 
 ## Decision-point summaries

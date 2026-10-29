@@ -35,7 +35,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    ledger (which reviews found real defects, which were skipped, and why) and
    its Kit gaps: each is a proposed instruction fix for step 3, made where that
    instruction lives (a kit asset in memento, a repo's CLAUDE.md in that repo),
-   or dropped with a reason if the user disagrees. Then
+   or dropped with a reason if the user disagrees. One that won't be fixed in
+   this feature goes to the ideas ledger in step 4. Then
    ask the two questions while context is fresh:
    - What rules/skills/personas HELPED this feature? What got in the way?
    - Is there a workflow we can crystallize to make the next change easier
@@ -46,13 +47,24 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
    against memento. Don't leave the improvement stranded in the consuming repo.
    If the repo carries a vendored/forked copy, hand off to
    `memento:workflow-sync` to upstream it (repo → memento).
-4. **Sync check.** Run `memento:workflow-sync` to detect any drift (including
+4. **Route to the ideas ledger.** Run `${CLAUDE_PLUGIN_ROOT}/bin/ideas-ledger.sh`
+   for the ledger's path. Every Kit gap, review finding or reflection
+   follow-up that this feature did not fix becomes an `open` row, with this
+   feature as its Source; nothing is left only in the archive. Then mark the
+   feature's own row (add one if it has none) `shipped: <PR>`, and fill its
+   **Did it fire?** cell with `look for: <what a real session would show if the
+   change works> · unchecked`, concrete enough that the weekly pulse can spot
+   it in a transcript or a workspace. Write the row IDs into Closeout's
+   **Ledger** line. Write `none: <why>` there only when there are no
+   leftovers and nothing a session could show (a spike, a docs typo);
+   `archive-feature.sh` refuses a missing, placeholder or reasonless value.
+5. **Sync check.** Run `memento:workflow-sync` to detect any drift (including
    project-scope skills that shadow the kit) and reconcile.
-5. **Graduate.** Decide where the durable record lives (see `memento:orchestrate`
+6. **Graduate.** Decide where the durable record lives (see `memento:orchestrate`
    graduation routing); propose, let the user confirm (on a decision card when
    the session offers one). Fill `PROGRESS.md`
-   Closeout (Graduated to / Archived).
-6. **Archive + sweep.** Run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh <dir>`
+   Closeout (Graduated to / Ledger / Archived).
+7. **Archive + sweep.** Run `${CLAUDE_PLUGIN_ROOT}/bin/archive-feature.sh <dir>`
    (refuses without a complete Closeout; it archives within the same workspace
    root, so a shared-folder feature stays in the shared folder), then
    `${CLAUDE_PLUGIN_ROOT}/bin/sweep-archive.sh` to GC old archives.
@@ -62,6 +74,8 @@ is where workflow-asset learning gets crystallized so the NEXT feature is easier
 - Merged feature
 - A reflection note (what helped / didn't)
 - Any improved workflow asset committed back to memento
+- Ideas-ledger rows: leftovers as `open`, the feature `shipped` with a
+  "did it fire?" line
 - A completed Closeout, archived workspace, swept archive
 
 ## Notes

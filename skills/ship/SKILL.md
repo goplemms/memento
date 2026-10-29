@@ -50,8 +50,13 @@ that doesn't need land's reflection ritual.
 8. **Reflect, briefly.** After the merge, ask one question while context is
    fresh: what in the kit helped this change, and what got in the way? Write
    the answer in one or two lines, in the PR as a comment or, inside a feature,
-   in `PROGRESS.md`'s Closeout. If the answer names a kit asset to change, say
-   so; `memento:land` and the monthly skills-mining routine pick those up. Skip
+   in `PROGRESS.md`'s Closeout. If the answer names a kit asset to change and
+   it isn't changed now, add it as an `open` row to the ideas ledger
+   (`${CLAUDE_PLUGIN_ROOT}/bin/ideas-ledger.sh` prints where), so it becomes
+   work instead of a note. When the merge changes how sessions behave, also
+   add or update the change's row as `shipped: <PR>` with a **Did it fire?**
+   `look for: <what a session would show> · unchecked`, so the weekly pulse
+   checks it reached real use. Inside a feature, `memento:land` does both. Skip
    it for a one-line fix, and say you skipped it.
 
 ## Outputs
